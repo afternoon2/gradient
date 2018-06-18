@@ -1,0 +1,29 @@
+{
+  "name": "gradient-maker",
+  "version": "0.1.0",
+  "description": "Css/svg/canvas gradient maker that runs in the browser",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "css",
+    "svg",
+    "canvas",
+    "gradients",
+    "colors"
+  ],
+  "author": "Jakub Antolak <poprostuantolak@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chroma-js": "^1.3.7",
+    "jsdoc": "^3.5.5",
+    "rollup": "^0.60.7",
+    "rollup-plugin-cleanup": "^3.0.0-beta.1",
+    "rollup-plugin-commonjs": "^9.1.3",
+    "rollup-plugin-copy": "^0.2.3",
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-tslint": "^0.1.34",
+    "rollup-plugin-typescript2": "^0.15.0"
+  }
+}
