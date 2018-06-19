@@ -1,1 +1,1 @@
-import Inputs from './Inputs'
+import Input from './input/input'

@@ -4,20 +4,20 @@ export interface IRgb {
     b: number
 }
 
-export interface IInputs {
+export interface IInput {
     rgb: IRgb[],
     hex: string[]
 }
 
-export default class Inputs implements IInputs {
+export default class Input implements IInput {
 
-    private inputs: IInputs
+    private inputs: IInput
 
     constructor(public colors: IRgb[]) {
         this.inputs = this.check(colors)
     }
 
-    public get allInputs(): IInputs {
+    public get allInputs(): IInput {
         return this.inputs
     }
 
@@ -29,16 +29,11 @@ export default class Inputs implements IInputs {
         return this.inputs.rgb
     }
 
-    private check(colors: IRgb[]): IInputs {
-        const output: IInputs = {
-            rgb: null,
-            hex: null
+    private check(colors: IRgb[]): IInput {
+        return {
+            rgb: colors,
+            hex: colors.map(color => this.rgbToHex(color))
         }
-
-        output.rgb = colors
-        output.hex = colors.map(color => this.rgbToHex(color))
-
-        return output
     }
 
     private rgbPartToHex(part: number): string {
