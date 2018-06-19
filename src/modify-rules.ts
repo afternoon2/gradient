@@ -14,7 +14,17 @@ import {
     POSITION
 } from './sets/css-set'
 
-const onInterpolation = (config: any) => {
+export interface IConfigEntry {
+    name: string,
+    type: string,
+    value: any
+    active: boolean
+    items?: string[] | number[]
+}
+
+declare type IConfig = IConfigEntry[]
+
+const onInterpolation = (config: IConfig) => {
     switch (config[INTERPOLATION].value) {
         case 'linear':
             config[MODE].active = true
@@ -27,7 +37,7 @@ const onInterpolation = (config: any) => {
     }
 }
 
-const onGradientType = (config: any) => {
+const onGradientType = (config: IConfig) => {
     switch (config[CSS_GRADIENT_TYPE].value) {
         case 'linear':
             onLinearGradient(config)
@@ -40,7 +50,7 @@ const onGradientType = (config: any) => {
     }
 }
 
-const onLinearGradient = (config: any) => {
+const onLinearGradient = (config: IConfig) => {
     config[WITH_ANGLE].active = true
     config[SHAPE].active = false
     config[EXTENT_KEYWORD].active = false
@@ -49,19 +59,19 @@ const onLinearGradient = (config: any) => {
     config[LEFT].active = false
 }
 
-const onRadialGradient = (config: any) => {
+const onRadialGradient = (config: IConfig) => {
     config[WITH_ANGLE].active = false
     config[ANGLE].active = false
     config[POSITION].active = true
 }
 
-const onWithAngle = (config: any) => {
+const onWithAngle = (config: IConfig) => {
     config[WITH_ANGLE].active ?
         config[ANGLE].active = true :
         config[ANGLE].active = false
 }
 
-const onPosition = (config: any) => {
+const onPosition = (config: IConfig) => {
     if (config[POSITION].active) {
         config[TOP].active = true
         config[LEFT].active = true
@@ -70,7 +80,7 @@ const onPosition = (config: any) => {
     config[LEFT].active = false
 }
 
-const onShape = (config: any) => {
+const onShape = (config: IConfig) => {
     switch (config[SHAPE].value) {
         case 'circle':
             config[EXTENT_KEYWORD].active = false
@@ -78,10 +88,12 @@ const onShape = (config: any) => {
         case 'ellipse':
             config[EXTENT_KEYWORD].active = true
             break
+        default:
+            return
     }
 }
 
-const modifyRules = (config: any) => {
+const modifyRules = (config: IConfig) => {
     onInterpolation(config)
     onGradientType(config)
 }
