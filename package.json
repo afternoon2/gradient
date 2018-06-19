@@ -4,7 +4,7 @@
   "description": "Css/svg/canvas gradient maker that runs in the browser",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "rollup -c"
   },
   "keywords": [
     "css",
