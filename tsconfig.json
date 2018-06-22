@@ -6,5 +6,12 @@
     },
     "include": [
         "./src/**/*"
-    ]
+    ],
+    "jest": {
+        "globals": {
+            "ts-jest": {
+                "tsConfigFile": "tsconfig.json"
+            }
+        }
+    }
 }
