@@ -15,6 +15,8 @@
         "arrow-parens": false,
         "no-bitwise": false,
         "object-literal-sort-keys": false,
-        "ordered-imports": false
+        "ordered-imports": false,
+        "variable-name": false,
+        "interface-over-type-literal": false
     }
 }
