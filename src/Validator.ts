@@ -1,6 +1,6 @@
 export type OptionsInterpolation = 'linear' | 'bezier'
 
-export type OptionsMode = 'none' | 'lrgb' | 'lch' | 'hsv' | 'lab'
+export type OptionsMode = 'lch' | 'hsv' | 'lab' | 'rgb' | 'hsl' | 'hsi' | 'hcl'  | 'none'
 
 export type BaseOptions = {
     interpolation: OptionsInterpolation,
@@ -71,8 +71,11 @@ export default class Validator {
                 options.mode !== 'none' &&
                 options.mode !== 'lch' &&
                 options.mode !== 'lab' &&
-                options.mode !== 'lrgb' &&
-                options.mode !== 'hsv'
+                options.mode !== 'rgb' &&
+                options.mode !== 'hsv' &&
+                options.mode !== 'hsl' &&
+                options.mode !== 'hsi' &&
+                options.mode !== 'hcl'
             ) ||
             typeof options.samples !== 'number' ||
             typeof options.lightnessCorrection !== 'boolean'
