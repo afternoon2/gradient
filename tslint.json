@@ -17,6 +17,7 @@
         "object-literal-sort-keys": false,
         "ordered-imports": false,
         "variable-name": false,
-        "interface-over-type-literal": false
+        "interface-over-type-literal": false,
+        "no-angle-bracket-type-assertion": false
     }
 }

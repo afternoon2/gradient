@@ -1,9 +1,13 @@
 import * as chroma from 'chroma-js'
 
+export type BaseOptionsInterpolation = 'linear' | 'bezier'
+
+export type BaseOptionsMode = 'none' | 'lrgb' | 'lch' | 'hsv' | 'lab'
+
 export type BaseOptions = {
-    interpolation: 'linear' | 'bezier',
+    interpolation: BaseOptionsInterpolation,
     samples: number,
-    mode: 'none' | 'lrgb' | 'lch' | 'hsv' | 'lab',
+    mode: BaseOptionsMode,
     lightnessCorrection: boolean
 }
 
@@ -29,10 +33,41 @@ export default class Base {
         this.hex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
         this.rgba = /rgba\(([0-9]+,\s)([0-9]+,\s)([0-9]+,\s)([0-9]?\.?[0-9]\))/
         this.validateInput()
+        this.validateOptions()
     }
 
     public get inputs(): string[] {
         return this.input
+    }
+
+    public get configuration(): BaseOptions {
+        return this.config
+    }
+
+    private validateOptions() {
+        if (
+            (
+                (<BaseOptions> this.config).interpolation !== 'linear' &&
+                (<BaseOptions> this.config).interpolation !== 'bezier'
+            ) ||
+            (
+                (<BaseOptions> this.config).mode !== 'none' &&
+                (<BaseOptions> this.config).mode !== 'lch' &&
+                (<BaseOptions> this.config).mode !== 'lab' &&
+                (<BaseOptions> this.config).mode !== 'lrgb' &&
+                (<BaseOptions> this.config).mode !== 'hsv'
+            ) ||
+            typeof this.config.samples !== 'number' ||
+            typeof this.config.lightnessCorrection !== 'boolean'
+        ) {
+            throw new Error('Invalid input object provided')
+        }
+        if (
+            this.config.interpolation === 'bezier' &&
+            this.config.mode !== 'none'
+        ) {
+            this.config.mode = 'none'
+        }
     }
 
     private validateInput() {

@@ -6,14 +6,15 @@ const hexInputs: string[] = [
     '#ffcc00',
     '#d39f00'
 ]
-const rgbaInputs: string[] = [
-    'rgba(0, 244, 44, 0.3)',
-    'rgba(1, 3, 124, 1)'
-]
 
 const mixedInputs: string[] = [
     'rgba(0, 244, 44, 0.3)',
     '#d39f00'
+]
+
+const rgbaInputs: string[] = [
+    'rgba(0, 244, 44, 0.3)',
+    'rgba(0, 244, 44, 0.3)'
 ]
 
 const fakeInputs: string[] = [
@@ -26,6 +27,27 @@ const opts: BaseOptions = {
     samples: 10,
     mode: 'none',
     lightnessCorrection: true
+}
+
+const optsToCorrect: BaseOptions = {
+    interpolation: 'bezier',
+    samples: 10,
+    mode: 'lab',
+    lightnessCorrection: false
+}
+
+const optsCorrected: BaseOptions = {
+    interpolation: 'bezier',
+    samples: 10,
+    mode: 'none',
+    lightnessCorrection: false
+}
+
+const fakeOpts: BaseOptions = {
+    interpolation: 'I am not the interpolation, lol',
+    samples: 10,
+    mode: 'I am not a mode, huh',
+    lightnessCorrection: false
 }
 
 const errorMessagePart: string = 'Wrong input format.'
@@ -59,5 +81,23 @@ test(
 
         expect(firstIsValid).toEqual(true)
         expect(secondIsValid).toEqual(true)
+    }
+)
+
+test(
+    'If options validation makes a valid correction of the color mode',
+    () => {
+        const base: Base = new Base(rgbaInputs, optsToCorrect)
+        expect(base.configuration).toEqual(optsCorrected)
+    }
+)
+
+test(
+    'If options validation throws an error after receiving invalid options object',
+    () => {
+        const safe = (): void => {
+            const base: Base = new Base(rgbaInputs, fakeOpts)
+        }
+        expect(safe).toThrowError('Invalid input object')
     }
 )
