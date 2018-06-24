@@ -27,7 +27,7 @@ export default class Base {
         this.input = colors
         this.config = options
         this.hex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
-        this.rgba = /rgba\([0-9]+\,\s[0-9]+\,\s[0-9]+\,\s[0-9]?\.[0-9]+\)/
+        this.rgba = /rgba\(([0-9]+,\s)([0-9]+,\s)([0-9]+,\s)([0-9]?\.?[0-9]\))/
         this.validateInput()
     }
 
@@ -49,15 +49,22 @@ export default class Base {
     }
 
     private checkIfHex() {
-        const hexIndex: number = this.findHexString()
-        if (hexIndex > -1) {
-            this.input[hexIndex] = this.hexToRgba(this.input[hexIndex])
+        const hexIndexes: number[] = this.findHexStrings()
+        if (hexIndexes.length > 0) {
+            hexIndexes.forEach(index => {
+                this.input[index] = this.hexToRgba(this.input[index])
+            })
         }
     }
 
-    private findHexString(): number {
-        return this.input
-            .findIndex(color => this.hex.test(color))
+    private findHexStrings(): number[] {
+        const indexes: number[] = []
+        this.input.forEach(color => {
+            if (this.hex.test(color)) {
+                indexes.push(this.input.indexOf(color))
+            }
+        })
+        return indexes
     }
 
     private hexToRgba(color: string): string {

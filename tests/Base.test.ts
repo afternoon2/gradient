@@ -31,7 +31,7 @@ const opts: BaseOptions = {
 const errorMessagePart: string = 'Wrong input format.'
 
 test(
-    'If input colors validation throws error on wrong string type', 
+    'If input colors validation throws error on wrong string type',
     () => {
         const safeValidate: any = (): void => {
             const base: Base = new Base(fakeInputs, opts)
@@ -46,5 +46,18 @@ test(
         const hex: RegExp = /^#(?:[0-9a-fA-F]{3}){1,2}$/
         const base: Base = new Base(mixedInputs, opts)
         expect(base.inputs.findIndex(color => hex.test(color))).toBe(-1)
+    }
+)
+
+test(
+    'If input colors validation converts all hex values into rgba strings',
+    () => {
+        const rgba: RegExp = /rgba\(([0-9]+,\s)([0-9]+,\s)([0-9]+,\s)([0-9]?\.?[0-9]\))/
+        const base: Base = new Base(hexInputs, opts)
+        const firstIsValid: boolean = rgba.test(base.inputs[0])
+        const secondIsValid: boolean = rgba.test(base.inputs[1])
+
+        expect(firstIsValid).toEqual(true)
+        expect(secondIsValid).toEqual(true)
     }
 )
