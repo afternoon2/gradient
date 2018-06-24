@@ -1,17 +1,17 @@
 import * as chroma from 'chroma-js'
 
-export type BaseOptionsInterpolation = 'linear' | 'bezier'
+export type OptionsInterpolation = 'linear' | 'bezier'
 
-export type BaseOptionsMode = 'none' | 'lrgb' | 'lch' | 'hsv' | 'lab'
+export type OptionsMode = 'none' | 'lrgb' | 'lch' | 'hsv' | 'lab'
 
-export type BaseOptions = {
-    interpolation: BaseOptionsInterpolation,
+export type ValidatorOptions = {
+    interpolation: OptionsInterpolation,
     samples: number,
-    mode: BaseOptionsMode,
+    mode: OptionsMode,
     lightnessCorrection: boolean
 }
 
-export default class Base {
+export default class Validator {
     private errorMessage: string = `
         Wrong input format. Following string color types are accepted:
         - hex
@@ -20,13 +20,13 @@ export default class Base {
         'rgba(255, 255, 255, .25)'
     `
     private input: string[]
-    private config: BaseOptions
+    private config: ValidatorOptions
     private hex: RegExp
     private rgba: RegExp
 
     constructor(
         private colors: string[],
-        private options: BaseOptions
+        private options: ValidatorOptions
     ) {
         this.input = colors
         this.config = options
@@ -40,22 +40,22 @@ export default class Base {
         return this.input
     }
 
-    public get configuration(): BaseOptions {
+    public get configuration(): ValidatorOptions {
         return this.config
     }
 
     private validateOptions() {
         if (
             (
-                (<BaseOptions> this.config).interpolation !== 'linear' &&
-                (<BaseOptions> this.config).interpolation !== 'bezier'
+                (<ValidatorOptions> this.config).interpolation !== 'linear' &&
+                (<ValidatorOptions> this.config).interpolation !== 'bezier'
             ) ||
             (
-                (<BaseOptions> this.config).mode !== 'none' &&
-                (<BaseOptions> this.config).mode !== 'lch' &&
-                (<BaseOptions> this.config).mode !== 'lab' &&
-                (<BaseOptions> this.config).mode !== 'lrgb' &&
-                (<BaseOptions> this.config).mode !== 'hsv'
+                (<ValidatorOptions> this.config).mode !== 'none' &&
+                (<ValidatorOptions> this.config).mode !== 'lch' &&
+                (<ValidatorOptions> this.config).mode !== 'lab' &&
+                (<ValidatorOptions> this.config).mode !== 'lrgb' &&
+                (<ValidatorOptions> this.config).mode !== 'hsv'
             ) ||
             typeof this.config.samples !== 'number' ||
             typeof this.config.lightnessCorrection !== 'boolean'
