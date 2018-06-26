@@ -1,5 +1,5 @@
 import Validator, {
-    BaseOptions
+    IBaseOptions
 } from '../src/Validator'
 
 const fakeColors: string[] = [
@@ -12,7 +12,7 @@ const mixedColors: string[] = [
     '#fcf01f'
 ]
 
-const options: BaseOptions = {
+const options: IBaseOptions = {
     interpolation: 'linear',
     samples: 10,
     mode: 'none',

@@ -1,44 +1,51 @@
-export type OptionsInterpolation = 'linear' | 'bezier'
+import errors from './errors'
 
+export type OptionsInterpolation = 'linear' | 'bezier'
 export type OptionsMode = 'lch' | 'hsv' | 'lab' | 'rgb' | 'hsl' | 'hsi' | 'hcl'  | 'none'
 
-export type BaseOptions = {
-    interpolation: OptionsInterpolation,
-    samples: number,
-    mode: OptionsMode,
+export interface IBaseOptions {
+    interpolation: OptionsInterpolation
+    samples: number
+    mode: OptionsMode
     lightnessCorrection: boolean
 }
 
+export type CssGradientType = 'linear' | 'radial'
+export type CssRadialGradientShape = 'ellipse' | 'circle'
+export type CssRadialGradientExtent = 'none' | 'closest-side' | 'closest-corner' | 'farthest-side' | 'farthest-corner'
+export interface ICssLinearGradientOptions {
+    withAngle: boolean
+    angle?: number
+}
+
+export interface ICssRadialGradientOptions {
+    position?: boolean
+    top?: number
+    left?: number
+    shape?: CssRadialGradientShape
+    extentKeyword?: CssRadialGradientExtent
+}
+
+export interface ICssOptions {
+    gradientType: 'linear' | 'radial',
+    meta: ICssLinearGradientOptions | ICssRadialGradientOptions
+}
+
 export default class Validator {
-    private invalidColorFormatMessage: string
-    private invalidConfigMessage: string
-    private mixedArrayMessage: string
     private hex: RegExp
     private rgba: RegExp
 
     constructor() {
         this.hex = /^#(?:[0-9a-fA-F]{3}){1,2}$/
         this.rgba = /rgba\(([0-9]+,\s)([0-9]+,\s)([0-9]+,\s)([0-9]?\.?[0-9]\))/
-        this.invalidColorFormatMessage = `
-            Wrong input format. Following string color types are accepted:
-            - hex
-            - rgba like:
-            'rgba(255, 255, 255, 0.25)' or
-            'rgba(255, 255, 255, .25)'
-        `
-        this.mixedArrayMessage = `
-            Colors array contains strings of both rgba and hex strings.
-            Please provide rgba strings only.
-        `
-        this.invalidConfigMessage = 'Invalid input object provided'
     }
 
     public validateColors(colors: string[]) {
         if (this.findInvalidString(colors)) {
-            throw new Error(this.invalidColorFormatMessage)
+            throw new Error(errors.base.invalidColorFormat)
         }
         if (this.isMixedArray(colors)) {
-            throw new Error(this.mixedArrayMessage)
+            throw new Error(errors.base.mixedArray)
         }
     }
 
@@ -48,6 +55,8 @@ export default class Validator {
             case 'base':
                 this.validateBaseOptions(options)
                 break
+            case 'css':
+                this.validateCssOptions(options)
             default:
                 return
         }
@@ -56,12 +65,13 @@ export default class Validator {
     private getOptionsType(options: any): string {
         if (options.interpolation) {
             return 'base'
-        } else if (options.cssGradientType) {
+        } else if (options.gradientType) {
             return 'css'
         }
     }
 
-    private validateBaseOptions(options: BaseOptions) {
+    // base options
+    private validateBaseOptions(options: IBaseOptions) {
         if (
             (
                 options.interpolation !== 'linear' &&
@@ -80,7 +90,7 @@ export default class Validator {
             typeof options.samples !== 'number' ||
             typeof options.lightnessCorrection !== 'boolean'
         ) {
-            throw new Error(this.invalidConfigMessage)
+            throw new Error(errors.base.invalidConfig)
         }
     }
 
@@ -103,5 +113,17 @@ export default class Validator {
     ): number {
         return colors
             .findIndex(color => this[format].test(color))
+    }
+
+    // css options
+    private validateCssOptions(options: ICssOptions) {
+        switch (options.gradientType) {
+            case 'linear':
+
+            case 'radial':
+
+            default:
+                return
+        }
     }
 }

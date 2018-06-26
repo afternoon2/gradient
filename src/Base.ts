@@ -1,15 +1,15 @@
 import * as chroma from 'chroma-js'
-import Validator, { BaseOptions } from './Validator'
+import Validator, { IBaseOptions } from './Validator'
 
 export default class Base {
     public colors: string[]
-    public config: BaseOptions
+    public config: IBaseOptions
 
     private validator: Validator
 
     constructor(
         public input: string[],
-        public options: BaseOptions
+        public options: IBaseOptions
     ) {
         this.colors = input
         this.config = options
@@ -25,18 +25,14 @@ export default class Base {
     }
 
     private createScale() {
-        let scale
         switch (this.config.interpolation) {
             case 'linear':
-                scale = this.linearInterpolationScale()
-                break
+                return this.linearInterpolationScale()
             case 'bezier':
-                scale = this.bezierInterpolationScale()
-                break
+                return this.bezierInterpolationScale()
             default:
                 return
         }
-        return scale
     }
 
     private createBase(scale: any): string[] {
