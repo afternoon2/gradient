@@ -149,17 +149,14 @@ export default class Validator {
            typeof meta.left === 'number'
         ) {
            console.warn(messages.css.topLeftWithNoPosition)
-        } else if (
-            typeof meta.position !== 'boolean' &&
-            typeof meta.top === 'number' &&
-            typeof meta.left === 'number'
-        ) {
+        } else if (typeof meta.position !== 'boolean') {
             throw new Error(messages.css.invalidPositionType)
         } else if (
             typeof meta.position === 'boolean' &&
+            meta.position === true &&
             (
-                !meta.position.top ||
-                !meta.position.left
+                !meta.top ||
+                !meta.left
             )
         ) {
             throw new Error(messages.css.missingTopOrLeftProperty)
