@@ -1,4 +1,4 @@
-import errors from './errors'
+import messages from './messages'
 
 export type OptionsInterpolation = 'linear' | 'bezier'
 export type OptionsMode = 'lch' | 'hsv' | 'lab' | 'rgb' | 'hsl' | 'hsi' | 'hcl'  | 'none'
@@ -13,6 +13,7 @@ export interface IBaseOptions {
 export type CssGradientType = 'linear' | 'radial'
 export type CssRadialGradientShape = 'ellipse' | 'circle'
 export type CssRadialGradientExtent = 'none' | 'closest-side' | 'closest-corner' | 'farthest-side' | 'farthest-corner'
+
 export interface ICssLinearGradientOptions {
     withAngle: boolean
     angle?: number
@@ -42,10 +43,10 @@ export default class Validator {
 
     public validateColors(colors: string[]) {
         if (this.findInvalidString(colors)) {
-            throw new Error(errors.base.invalidColorFormat)
+            throw new Error(messages.base.invalidColorFormat)
         }
         if (this.isMixedArray(colors)) {
-            throw new Error(errors.base.mixedArray)
+            throw new Error(messages.base.mixedArray)
         }
     }
 
@@ -90,7 +91,7 @@ export default class Validator {
             typeof options.samples !== 'number' ||
             typeof options.lightnessCorrection !== 'boolean'
         ) {
-            throw new Error(errors.base.invalidConfig)
+            throw new Error(messages.base.invalidConfig)
         }
     }
 
@@ -119,11 +120,22 @@ export default class Validator {
     private validateCssOptions(options: ICssOptions) {
         switch (options.gradientType) {
             case 'linear':
-
-            case 'radial':
-
+                this.validateLinearGradientOptions(options.meta)
+                break
             default:
-                return
+                throw new Error(messages.css.noGradientType)
+        }
+    }
+
+    private validateLinearGradientOptions(meta: ICssLinearGradientOptions) {
+        if (!meta.hasOwnProperty('withAngle')) {
+            throw new Error(messages.css.noWithAngle)
+        }
+        if (!meta.withAngle && typeof meta.angle === 'number') {
+            console.warn(messages.css.angleIgnored)
+        }
+        if (meta.withAngle && typeof meta.angle !== 'number') {
+            throw new Error(messages.css.noAngle)
         }
     }
 }

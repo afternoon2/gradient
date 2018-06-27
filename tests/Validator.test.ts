@@ -1,3 +1,4 @@
+/* tslint:disable */
 import Validator, {
     IBaseOptions
 } from '../src/Validator'
@@ -11,13 +12,6 @@ const mixedColors: string[] = [
     'rgba(0, 0, 0, 0.4)',
     '#fcf01f'
 ]
-
-const options: IBaseOptions = {
-    interpolation: 'linear',
-    samples: 10,
-    mode: 'none',
-    lightnessCorrection: false
-}
 
 const fakeOptions: any = {
     interpolation: 'No interpolation provided',
@@ -51,12 +45,67 @@ test(
 
 // Test base options
 test(
-    'If base options validation throws error on invalid base options object',
+    'If base options validation throws an error on invalid base options object',
     () => {
         const validator = new Validator()
         const safeValidation = (): void => {
             validator.validateOptions(fakeOptions)
         }
         expect(safeValidation).toThrowError('Invalid input object')
+    }
+)
+
+// Test css options
+test(
+    'If css options validation throws an error on invalid gradient type',
+    () => {
+        const fakeGradientTypeOpts = {
+            gradientType: 'none',
+            meta: {
+                withAngle: true,
+                angle: 80
+            }
+        }
+        const validator = new Validator()
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeGradientTypeOpts)
+        }
+        expect(safeValidation).toThrowError('Missing gradient type property ')
+    }
+)
+
+test(
+    'If css linear gradient options validation throws an error when there is no withAngle property in the meta entry',
+    () => {
+        const fakeConfig = {
+            gradientType: 'linear',
+            meta: {
+                angle: 20
+            }
+        }
+        const validator: Validator = new Validator()
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeConfig)
+        }
+        expect(safeValidation).toThrowError('Missing withAngle property')
+    }
+)
+
+test(
+    'If css linear gradient options validation warns about falsy withAngle property when the angle property is present and correct',
+    () => {
+        const spy = jest.spyOn(global.console, 'warn')
+        const fakeConfig = {
+            gradientType: 'linear',
+            meta: {
+                withAngle: false,
+                angle: 20
+            }
+        }
+        const validator: Validator = new Validator()
+        validator.validateOptions(fakeConfig)
+        expect(spy).toHaveBeenCalled()
+        spy.mockReset()
+        spy.mockRestore()
     }
 )

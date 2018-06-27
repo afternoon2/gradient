@@ -17,11 +17,15 @@ export default {
         noGradientType: `
             Missing gradient type property in css configuration object
         `,
+        noWithAngle: `
+            Missing withAngle property in the 'meta' entry of css configuration object
+        `,
+        angleIgnored: `
+            withAngle property in the 'meta' entry of css configuration file set to false,
+            angle value will be ignored
+        `,
         noAngle: `
             Missing angle property in css configuration object
-        `,
-        noShape: `
-            Missing shape property in css configuration object.
         `
     }
 }
