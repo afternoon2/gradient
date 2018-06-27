@@ -1,4 +1,5 @@
 import * as chroma from 'chroma-js'
+import { Scale } from 'chroma-js'
 import Validator, { IBaseOptions } from './Validator'
 
 export default class Base {
@@ -15,7 +16,7 @@ export default class Base {
         this.config = options
         this.validator = new Validator()
         this.validator.validateColors(this.colors)
-        this.validator.validateOptions(this.options)
+        this.validator.validateOptions(this.config)
     }
 
     public generate(): number[][] {
@@ -24,7 +25,7 @@ export default class Base {
         return this.normalize(base)
     }
 
-    private createScale() {
+    private createScale(): Scale {
         switch (this.config.interpolation) {
             case 'linear':
                 return this.linearInterpolationScale()
@@ -43,7 +44,7 @@ export default class Base {
         return base
     }
 
-    private linearInterpolationScale() {
+    private linearInterpolationScale(): any {
         if (this.config.mode !== 'none') {
             if (this.config.lightnessCorrection) {
                 return chroma
@@ -67,7 +68,7 @@ export default class Base {
         }
     }
 
-    private bezierInterpolationScale() {
+    private bezierInterpolationScale(): any {
         if (this.config.lightnessCorrection) {
             return chroma
                 .bezier(this.colors)
