@@ -122,6 +122,9 @@ export default class Validator {
             case 'linear':
                 this.validateLinearGradientOptions(options.meta)
                 break
+            case 'radial':
+                this.validateRadialGradientOptions(options.meta)
+                break
             default:
                 throw new Error(messages.css.noGradientType)
         }
@@ -136,6 +139,30 @@ export default class Validator {
         }
         if (meta.withAngle && typeof meta.angle !== 'number') {
             throw new Error(messages.css.noAngle)
+        }
+    }
+
+    private validateRadialGradientOptions(meta: ICssRadialGradientOptions) {
+        if (
+           !meta.hasOwnProperty('position') &&
+           typeof meta.top === 'number' &&
+           typeof meta.left === 'number'
+        ) {
+           console.warn(messages.css.topLeftWithNoPosition)
+        } else if (
+            typeof meta.position !== 'boolean' &&
+            typeof meta.top === 'number' &&
+            typeof meta.left === 'number'
+        ) {
+            throw new Error(messages.css.invalidPositionType)
+        } else if (
+            typeof meta.position === 'boolean' &&
+            (
+                !meta.position.top ||
+                !meta.position.left
+            )
+        ) {
+            throw new Error(messages.css.missingTopOrLeftProperty)
         }
     }
 }

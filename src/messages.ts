@@ -26,6 +26,15 @@ export default {
         `,
         noAngle: `
             Missing angle property in css configuration object
+        `,
+        topLeftWithNoPosition: `
+            Top and left properties will be ignored because there is no position property provided
+        `,
+        invalidPositionType: `
+            Invalid position property provided. Expected: boolean
+        `,
+        missingTopOrLeftProperty: `
+            Top or left radial gradient property is missing
         `
     }
 }

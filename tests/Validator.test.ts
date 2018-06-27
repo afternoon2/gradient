@@ -3,28 +3,20 @@ import Validator, {
     IBaseOptions
 } from '../src/Validator'
 
-const fakeColors: string[] = [
-    'I am not a color!',
-    'Me too!'
-]
+let validator: Validator
 
-const mixedColors: string[] = [
-    'rgba(0, 0, 0, 0.4)',
-    '#fcf01f'
-]
-
-const fakeOptions: any = {
-    interpolation: 'No interpolation provided',
-    samples: false,
-    mode: 'rgb',
-    lightnessCorrection: 1
-}
+beforeEach(() => {
+    validator = new Validator()
+})
 
 // Test colors
 test(
     '[base] If validator throws error on invalid colors array',
     () => {
-        const validator: Validator = new Validator()
+        const fakeColors: string[] = [
+            'I am not a color!',
+            'Me too!'
+        ]
         const safeValidation = (): void => {
             validator.validateColors(fakeColors)
         }
@@ -35,7 +27,10 @@ test(
 test(
     '[base] If validator throws error on mixed color types array',
     () => {
-        const validator: Validator = new Validator()
+        const mixedColors: string[] = [
+            'rgba(0, 0, 0, 0.4)',
+            '#fcf01f'
+        ]
         const safeValidation = (): void => {
             validator.validateColors(mixedColors)
         }
@@ -47,7 +42,12 @@ test(
 test(
     '[base] If base options validation throws an error on invalid base options object',
     () => {
-        const validator = new Validator()
+        const fakeOptions: any = {
+            interpolation: 'No interpolation provided',
+            samples: false,
+            mode: 'rgb',
+            lightnessCorrection: 1
+        }
         const safeValidation = (): void => {
             validator.validateOptions(fakeOptions)
         }
@@ -57,7 +57,7 @@ test(
 
 // Test css options
 test(
-    'If css options validation throws an error on invalid gradient type',
+    '[css-linear-gradient] If validator throws an error on invalid gradient type',
     () => {
         const fakeGradientTypeOpts = {
             gradientType: 'none',
@@ -66,7 +66,6 @@ test(
                 angle: 80
             }
         }
-        const validator = new Validator()
         const safeValidation = (): void => {
             validator.validateOptions(fakeGradientTypeOpts)
         }
@@ -83,7 +82,6 @@ test(
                 angle: 20
             }
         }
-        const validator: Validator = new Validator()
         const safeValidation = (): void => {
             validator.validateOptions(fakeConfig)
         }
@@ -102,7 +100,6 @@ test(
                 angle: 20
             }
         }
-        const validator: Validator = new Validator()
         validator.validateOptions(fakeConfig)
         expect(spy).toHaveBeenCalled()
         spy.mockReset()
@@ -120,10 +117,65 @@ test(
                 angle: null
             }
         }
-        const validator: Validator = new Validator()
         const safeValidation = (): void => {
             validator.validateOptions(fakeConfig)
         }
         expect(safeValidation).toThrowError('Missing angle property in css configuration')
+    }
+)
+
+test(
+    '[css-radial-gradient] If the validator throws an error when there is no position property provided',
+    () => {
+        const spy = jest.spyOn(global.console, 'warn')
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                top: 90,
+                left: 10,
+                shape: 'ellipse',
+                extentKeyword: 'none'
+            }
+        }
+        validator.validateOptions(fakeConfig)
+        expect(spy).toHaveBeenCalled()
+        spy.mockReset()
+        spy.mockRestore()
+    }
+)
+
+test(
+    '[css-radial-gradient] If the validator throws an error when there is invalid position property provided',
+    () => {
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                position: 'nope',
+                left: 10,
+                top: 10
+            }
+        }
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeConfig)
+        }
+        expect(safeValidation).toThrowError('Invalid position property')
+    }
+)
+
+test(
+    '[css-radial-gradient] If validator throws an error when there is top or left property missing while position is set properly',
+    () => {
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                position: true,
+                top: 0,
+                left: null,
+            }
+        }
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeConfig)
+        }
+        expect(safeValidation).toThrowError('Top or left radial gradient property')
     }
 )
