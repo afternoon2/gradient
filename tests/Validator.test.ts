@@ -22,7 +22,7 @@ const fakeOptions: any = {
 
 // Test colors
 test(
-    'If validator throws error on invalid colors array',
+    '[base] If validator throws error on invalid colors array',
     () => {
         const validator: Validator = new Validator()
         const safeValidation = (): void => {
@@ -33,7 +33,7 @@ test(
 )
 
 test(
-    'If validator throws error on mixed color types array',
+    '[base] If validator throws error on mixed color types array',
     () => {
         const validator: Validator = new Validator()
         const safeValidation = (): void => {
@@ -45,7 +45,7 @@ test(
 
 // Test base options
 test(
-    'If base options validation throws an error on invalid base options object',
+    '[base] If base options validation throws an error on invalid base options object',
     () => {
         const validator = new Validator()
         const safeValidation = (): void => {
@@ -75,7 +75,7 @@ test(
 )
 
 test(
-    'If css linear gradient options validation throws an error when there is no withAngle property in the meta entry',
+    '[css-linear-gradient] If validator throws an error when there is no withAngle property in the meta entry',
     () => {
         const fakeConfig = {
             gradientType: 'linear',
@@ -92,7 +92,7 @@ test(
 )
 
 test(
-    'If css linear gradient options validation warns about falsy withAngle property when the angle property is present and correct',
+    '[css-linear-gradient] If validator warns about falsy withAngle property when the angle property is present and correct',
     () => {
         const spy = jest.spyOn(global.console, 'warn')
         const fakeConfig = {
@@ -107,5 +107,23 @@ test(
         expect(spy).toHaveBeenCalled()
         spy.mockReset()
         spy.mockRestore()
+    }
+)
+
+test(
+    '[css-linear-gradient] If validator throws an error when there is withAngle option set to true, but there is no angle value provided',
+    () => {
+        const fakeConfig = {
+            gradientType: 'linear',
+            meta: {
+                withAngle: true,
+                angle: null
+            }
+        }
+        const validator: Validator = new Validator()
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeConfig)
+        }
+        expect(safeValidation).toThrowError('Missing angle property in css configuration')
     }
 )
