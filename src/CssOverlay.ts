@@ -10,7 +10,11 @@ export default class CssOverlay extends Overlay {
     }
 
     public createGradient(): string {
-        return `${this.options.gradientType}-gradient(${this.angle}${this.shape}${this.extent}${this.input})`
+        return `${this.options.gradientType}-gradient(${this.angle}${this.shape}${this.extent}${this.convertInput()})`
+    }
+
+    private convertInput(): string[] {
+        return this.input.map(c => `rgba(${c[0]}, ${c[1]}, ${c[2]}, ${c[3]})`)
     }
 
     private get angle(): string {
@@ -24,7 +28,7 @@ export default class CssOverlay extends Overlay {
         const meta = this.options.meta
         if (this.options.gradientType === 'radial') {
             if (
-                meta.shape === 'ellipse' && 
+                meta.shape === 'ellipse' &&
                 meta.position === false
             ) {
                 return meta.shape + ', '
@@ -58,10 +62,13 @@ export default class CssOverlay extends Overlay {
 
     private get extent(): string {
         const meta = this.options.meta
-        const afterExtent: string = meta.position === true ?
+        const afterExtent: string = meta.position ?
             ` at ${meta.left}% ${meta.left.top}%, ` :
             ', '
-        if (meta.extentKeyword !== 'none') {
+        if (
+            meta.extentKeyword !== undefined &&
+            meta.extentKeyword !== 'none'
+        ) {
             return meta.extentKeyword + afterExtent
         }
         return ''
