@@ -35,6 +35,20 @@ export default {
         `,
         missingTopOrLeftProperty: `
             Top or left radial gradient property is missing
+        `,
+        missingShapeProperty: `
+            Shape property is missing
+        `,
+        invalidShapeType: `
+            Invalid shape property provided. Expected 'ellipse' or 'circle'
+        `,
+        extentWithEllipse: `
+            extentKeyword is other than 'none' while shape is set to 'ellipse'.
+            'ellipse' property will be ignored
+        `,
+        extentWithCircle: `
+            shape property is set to 'circle' while extentKeyword is other than 'none'.
+            extentKeyword property will be ignored
         `
     }
 }

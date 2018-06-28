@@ -161,5 +161,27 @@ export default class Validator {
         ) {
             throw new Error(messages.css.missingTopOrLeftProperty)
         }
+
+        if (!meta.hasOwnProperty('shape')) {
+            throw new Error(messages.css.missingShapeProperty)
+        } else if (
+            meta.shape !== 'circle' &&
+            meta.shape !== 'ellipse'
+        ) {
+            throw new Error(messages.css.invalidShapeType)
+        } else if (
+            meta.shape === 'ellipse' &&
+            meta.extentKeyword !== 'none'
+        ) {
+            console.warn(messages.css.extentWithEllipse)
+        } else if (
+            meta.shape === 'circle' &&
+            (
+                meta.extentKeyword !== 'none' ||
+                !meta.extentKeyword
+            )
+        ) {
+            console.warn(messages.css.extentWithCircle)
+        }
     }
 }

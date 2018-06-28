@@ -179,3 +179,74 @@ test(
         expect(safeValidation).toThrowError('Top or left radial gradient property')
     }
 )
+
+test(
+    '[css-radial-gradient] If the validator throws an error when there is no shape property provided',
+    () => {
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                position: false
+            }
+        }
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeConfig)
+        }
+        expect(safeValidation).toThrowError('Shape property is')
+    }
+)
+
+test(
+    '[css-radial-gradient] If the validator throws an error when there is invalid shape property provided',
+    () => {
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                position: false,
+                shape: false
+            }
+        }
+        const safeValidation = (): void => {
+            validator.validateOptions(fakeConfig)
+        }
+        expect(safeValidation).toThrowError('Invalid shape property provided')
+    }
+)
+
+test(
+    '[css-radial-gradient] If the validator throws a warning when the shape is set to "ellipse" but the extentKeyword is other than "none"',
+    () => {
+        const spy = jest.spyOn(global.console, 'warn')
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                position: false,
+                shape: 'ellipse',
+                extentKeyword: 'farthest-corner'
+            }
+        }
+        validator.validateOptions(fakeConfig)
+        expect(spy).toHaveBeenCalled()
+        spy.mockReset()
+        spy.mockRestore()
+    }
+)
+
+test(
+    '[css-radial-gradient] If the validator throws a warning when the shape is set to "circle" but the extentKeyword is other than "none"',
+    () => {
+        const spy = jest.spyOn(global.console, 'warn')
+        const fakeConfig = {
+            gradientType: 'radial',
+            meta: {
+                position: false,
+                shape: 'circle',
+                extentKeyword: 'farthest-corner'
+            }
+        }
+        validator.validateOptions(fakeConfig)
+        expect(spy).toHaveBeenCalled()
+        spy.mockReset()
+        spy.mockRestore()
+    }
+)
