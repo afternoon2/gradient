@@ -1,12 +1,12 @@
-import { BaseOptions } from '../src/Validator'
-import Base from '../src/Base'
+import { IBaseOptions } from '../src/Validator'
+import Base from '../src/base/Base'
 
 const colors: string[] = [
     'rgba(9, 9, 9, 0.5)',
     'rgba(255, 255, 240, 1)'
 ]
 
-const opts: BaseOptions = {
+const opts: IBaseOptions = {
     interpolation: 'linear',
     samples: 10,
     mode: 'none',

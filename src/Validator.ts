@@ -1,4 +1,4 @@
-import messages from './messages'
+import baseMessages from './base/messages'
 
 export type OptionsInterpolation = 'linear' | 'bezier'
 export type OptionsMode = 'lch' | 'hsv' | 'lab' | 'rgb' | 'hsl' | 'hsi' | 'hcl'  | 'none'
@@ -10,26 +10,17 @@ export interface IBaseOptions {
     lightnessCorrection: boolean
 }
 
-export type CssGradientType = 'linear' | 'radial'
+export type Csstype = 'linear' | 'radial'
 export type CssRadialGradientShape = 'ellipse' | 'circle'
 export type CssRadialGradientExtent = 'none' | 'closest-side' | 'closest-corner' | 'farthest-side' | 'farthest-corner'
 
-export interface ICssLinearGradientOptions {
-    withAngle: boolean
+export interface ICssOptions {
+    type: 'linear' | 'radial'
     angle?: number
-}
-
-export interface ICssRadialGradientOptions {
-    position?: boolean
     top?: number
     left?: number
     shape?: CssRadialGradientShape
-    extentKeyword?: CssRadialGradientExtent
-}
-
-export interface ICssOptions {
-    gradientType: 'linear' | 'radial',
-    meta: ICssLinearGradientOptions | ICssRadialGradientOptions
+    extent?: CssRadialGradientExtent
 }
 
 export default class Validator {
@@ -43,10 +34,10 @@ export default class Validator {
 
     public validateColors(colors: string[]) {
         if (this.findInvalidString(colors)) {
-            throw new Error(messages.base.invalidColorFormat)
+            throw new Error(baseMessages.base.invalidColorFormat)
         }
         if (this.isMixedArray(colors)) {
-            throw new Error(messages.base.mixedArray)
+            throw new Error(baseMessages.base.mixedArray)
         }
     }
 
@@ -56,8 +47,6 @@ export default class Validator {
             case 'base':
                 this.validateBaseOptions(options)
                 break
-            case 'css':
-                this.validateCssOptions(options)
             default:
                 return
         }
@@ -66,7 +55,7 @@ export default class Validator {
     private getOptionsType(options: any): string {
         if (options.interpolation) {
             return 'base'
-        } else if (options.gradientType) {
+        } else if (options.type) {
             return 'css'
         }
     }
@@ -91,7 +80,7 @@ export default class Validator {
             typeof options.samples !== 'number' ||
             typeof options.lightnessCorrection !== 'boolean'
         ) {
-            throw new Error(messages.base.invalidConfig)
+            throw new Error(baseMessages.base.invalidConfig)
         }
     }
 
@@ -116,72 +105,4 @@ export default class Validator {
             .findIndex(color => this[format].test(color))
     }
 
-    // css options
-    private validateCssOptions(options: ICssOptions) {
-        switch (options.gradientType) {
-            case 'linear':
-                this.validateLinearGradientOptions(options.meta)
-                break
-            case 'radial':
-                this.validateRadialGradientOptions(options.meta)
-                break
-            default:
-                throw new Error(messages.css.noGradientType)
-        }
-    }
-
-    private validateLinearGradientOptions(meta: ICssLinearGradientOptions) {
-        if (!meta.hasOwnProperty('withAngle')) {
-            throw new Error(messages.css.noWithAngle)
-        }
-        if (!meta.withAngle && typeof meta.angle === 'number') {
-            console.warn(messages.css.angleIgnored)
-        }
-        if (meta.withAngle && typeof meta.angle !== 'number') {
-            throw new Error(messages.css.noAngle)
-        }
-    }
-
-    private validateRadialGradientOptions(meta: ICssRadialGradientOptions) {
-        if (
-           !meta.hasOwnProperty('position') &&
-           typeof meta.top === 'number' &&
-           typeof meta.left === 'number'
-        ) {
-           console.warn(messages.css.topLeftWithNoPosition)
-        } else if (typeof meta.position !== 'boolean') {
-            throw new Error(messages.css.invalidPositionType)
-        } else if (
-            typeof meta.position === 'boolean' &&
-            meta.position === true &&
-            (
-                !meta.top ||
-                !meta.left
-            )
-        ) {
-            throw new Error(messages.css.missingTopOrLeftProperty)
-        }
-
-        if (!meta.hasOwnProperty('shape')) {
-            throw new Error(messages.css.missingShapeProperty)
-        } else if (
-            meta.shape !== 'circle' &&
-            meta.shape !== 'ellipse'
-        ) {
-            throw new Error(messages.css.invalidShapeType)
-        } else if (
-            meta.shape === 'ellipse' &&
-            meta.extentKeyword !== 'none'
-        ) {
-            console.warn(messages.css.extentWithEllipse)
-        } else if (
-            meta.shape === 'circle' &&
-            (
-                meta.extentKeyword !== 'none' ||
-                !meta.extentKeyword
-            )
-        ) {
-            console.warn(messages.css.extentWithCircle)
-        }
-    }
 }

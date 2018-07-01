@@ -1,6 +1,6 @@
 import * as chroma from 'chroma-js'
 import { Scale } from 'chroma-js'
-import Validator, { IBaseOptions } from './Validator'
+import Validator, { IBaseOptions } from '../Validator'
 
 export default class Base {
     public colors: string[]
