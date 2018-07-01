@@ -5,7 +5,7 @@ import typescript from 'rollup-plugin-typescript2'
 import tslint from 'rollup-plugin-tslint'
 
 export default {
-    entry: './src/gradient-maker.ts',
+    entry: './src/index.ts',
     output: [
         {
             format: 'es',
