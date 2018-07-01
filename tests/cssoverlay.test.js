@@ -1,9 +1,8 @@
-/* tslint:disable */
 import CssOverlay from '../src/css/CssOverlay'
 
-let overlay: CssOverlay
+let overlay
 
-const linearGradientExp: RegExp = /linear-gradient\(([0-9]+deg)?\,?\s?rgba\([0-9]+\,\s?[0-9]+\,\s?[0-9]+\,\s?[0-9]?\.?([0-9]+)?\),\s?rgba\([0-9]+\,\s?[0-9]+\,\s?[0-9]+\,\s?[0-9]?\.?([0-9]+)?\)\)/
+const linearGradientExp = /linear-gradient\(([0-9]+deg)?\,?\s?rgba\([0-9]+\,\s?[0-9]+\,\s?[0-9]+\,\s?[0-9]?\.?([0-9]+)?\),\s?rgba\([0-9]+\,\s?[0-9]+\,\s?[0-9]+\,\s?[0-9]?\.?([0-9]+)?\)\)/
 
 test(
     'If css overlay returns correct linear gradient with no angle',
@@ -30,7 +29,7 @@ test(
             type: 'linear',
             angle: 90
         })
-        const regexp: RegExp = /linear-gradient\(([0-9]+deg\,\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /linear-gradient\(([0-9]+deg\,\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
@@ -46,7 +45,7 @@ test(
             type: 'radial',
             shape: 'ellipse'
         })
-        const regexp: RegExp = /radial-gradient\((rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /radial-gradient\((rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
@@ -62,7 +61,7 @@ test(
             type: 'radial',
             shape: 'circle'
         })
-        const regexp: RegExp = /radial-gradient\((circle\,\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /radial-gradient\((circle\,\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
@@ -80,7 +79,7 @@ test(
             top: 20,
             left: 60
         })
-        const regexp: RegExp = /radial-gradient\((circle\s?)(at\s([0-9]+%)\s[0-9]+%\,\s)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /radial-gradient\((circle\s?)(at\s([0-9]+%)\s[0-9]+%\,\s)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
@@ -97,7 +96,7 @@ test(
             shape: 'ellipse',
             extent: 'farthest-corner'
         })
-        const regexp: RegExp = /radial-gradient\(((farthest|closest)-(side|corner)\,\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /radial-gradient\(((farthest|closest)-(side|corner)\,\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
@@ -116,7 +115,7 @@ test(
             shape: 'ellipse',
             extent: 'farthest-corner'
         })
-        const regexp: RegExp = /radial-gradient\(((farthest|closest)-(side|corner)\,?\s?)(at(\s[0-9]+%)+\,?\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /radial-gradient\(((farthest|closest)-(side|corner)\,?\s?)(at(\s[0-9]+%)+\,?\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
@@ -134,7 +133,7 @@ test(
             left: 20,
             shape: 'ellipse'
         })
-        const regexp: RegExp = /radial-gradient\((\s?at(\s[0-9]+%)+\,?\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
+        const regexp = /radial-gradient\((\s?at(\s[0-9]+%)+\,?\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
         expect(regexp.test(gradient)).toBe(true)
     }
