@@ -1,5 +1,4 @@
 export default {
-    base: {
         invalidColorFormat: `
                 Wrong input format. Following string color types are accepted:
                 - hex
@@ -12,5 +11,4 @@ export default {
                 Please provide rgba strings only.
             `,
         invalidConfig: 'Invalid input object provided'
-    }
 }

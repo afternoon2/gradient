@@ -136,7 +136,6 @@ test(
         })
         const regexp: RegExp = /radial-gradient\((\s?at(\s[0-9]+%)+\,?\s?)(rgba\(([0-9]+\,\s?)+([0-9]?\.?[0-9]+\)\,?\s?))+\)/
         const gradient = overlay.gradient
-        console.log(gradient)
         expect(regexp.test(gradient)).toBe(true)
     }
 )

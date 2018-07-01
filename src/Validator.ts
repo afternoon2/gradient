@@ -1,4 +1,5 @@
 import baseMessages from './base/messages'
+import cssMessages from './css/messages'
 
 export type OptionsInterpolation = 'linear' | 'bezier'
 export type OptionsMode = 'lch' | 'hsv' | 'lab' | 'rgb' | 'hsl' | 'hsi' | 'hcl'  | 'none'
@@ -34,10 +35,10 @@ export default class Validator {
 
     public validateColors(colors: string[]) {
         if (this.findInvalidString(colors)) {
-            throw new Error(baseMessages.base.invalidColorFormat)
+            throw new Error(baseMessages.invalidColorFormat)
         }
         if (this.isMixedArray(colors)) {
-            throw new Error(baseMessages.base.mixedArray)
+            throw new Error(baseMessages.mixedArray)
         }
     }
 
@@ -47,6 +48,8 @@ export default class Validator {
             case 'base':
                 this.validateBaseOptions(options)
                 break
+            case 'css':
+                this.validateCssOptions(options)
             default:
                 return
         }
@@ -57,6 +60,8 @@ export default class Validator {
             return 'base'
         } else if (options.type) {
             return 'css'
+        } else {
+            throw new Error('Invalid options provided')
         }
     }
 
@@ -80,7 +85,7 @@ export default class Validator {
             typeof options.samples !== 'number' ||
             typeof options.lightnessCorrection !== 'boolean'
         ) {
-            throw new Error(baseMessages.base.invalidConfig)
+            throw new Error(baseMessages.invalidConfig)
         }
     }
 
@@ -105,4 +110,31 @@ export default class Validator {
             .findIndex(color => this[format].test(color))
     }
 
+    // css options
+    private validateCssOptions(options: ICssOptions) {
+        if (
+            options.type === 'radial' &&
+            !options.shape
+        ) {
+            throw new Error(cssMessages.noShape)
+        }
+
+        if (
+            options.top &&
+            options.left &&
+            (typeof options.top !== 'number' || typeof options.left !== 'number') ||
+            (options.top < 0 || options.top > 100) ||
+            (options.left < 0 || options.left > 100)
+        ) {
+            throw new Error(cssMessages.invalidTopLeft)
+        }
+
+        if (
+            options.angle &&
+            typeof options.angle !== 'number' ||
+            (options.angle < 0 || options.angle > 359)
+        ) {
+            throw new Error(cssMessages.invalidAngle)
+        }
+    }
 }

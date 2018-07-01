@@ -10,12 +10,6 @@ export default class CssOverlay extends Overlay {
     }
 
     public get gradient(): string {
-        console.log(`
-            Type: ${this.config.type}
-            Angle: ${this.angle}
-            Shape: ${this.shape}
-            Extent: ${this.extent}
-        `)
         return `${this.config.type}-gradient(${this.angle}${this.shape}${this.extent}${this.stringifyColors()})`
     }
 
