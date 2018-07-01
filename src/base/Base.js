@@ -1,5 +1,5 @@
 import chroma from 'chroma-js'
-import Validator from '../validator/Validator'
+import Validator from '../Validator'
 
 /**
  * @class Base

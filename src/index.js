@@ -8,7 +8,7 @@ import CssOverlay from './css/CssOverlay'
 export default class GradientMaker {
     /**
      * Generates gradient depending on the options provided
-     *@param {string[]} colors - array of colors as strings in hex or css rgba format
+     * @param {string[]} colors - array of colors as strings in hex or css rgba format
      * @param {object} options - configuration object
      * @param {string} mode - sets the output mode (raw - array of rgba arrays, css - css
      */

@@ -8,22 +8,6 @@
     "type": "git",
     "url": "https://github.com/afternoon2/gradient-maker"
   },
-  "jest": {
-    "verbose": true,
-    "transform": {
-      "^.+\\.js$": "babel-jest"
-    },
-    "moduleDirectories": [
-      "node_modules",
-      "src",
-      "src/base",
-      "src/css",
-      "src/validator"
-    ],
-    "moduleFileExtensions": [
-      "js"
-    ]
-  },
   "scripts": {
     "dev": "rollup -c",
     "test": "jest"

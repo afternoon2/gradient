@@ -1,5 +1,5 @@
-import baseMessages from '../base/messages'
-import cssMessages from '../css/messages'
+import baseMessages from './base/messages'
+import cssMessages from './css/messages'
 
 /**
  * @class Validator

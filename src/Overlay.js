@@ -1,4 +1,4 @@
-import Validator from './validator/Validator'
+import Validator from './Validator'
 
 /**
  * @class Overlay
