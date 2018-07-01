@@ -19,7 +19,7 @@ export default class Base {
         this.validator.validateOptions(this.config)
     }
 
-    public generate(): number[][] {
+    public get base(): number[][] {
         const scale: any = this.createScale()
         const base: any[] = this.createBase(scale)
         return this.normalize(base)

@@ -37,14 +37,14 @@ export default class GradientMaker implements IGradientMaker {
         this.output  = mode
         this.base = new Base(this.colors, this.configurations.base)
         if (this.output === 'css') {
-            this.cssOverlay = new CssOverlay(this.base.generate(), this.configurations.css)
+            this.cssOverlay = new CssOverlay(this.base.base, this.configurations.css)
         }
     }
 
     public get gradient(): any {
         switch (this.output) {
             case 'raw':
-                return this.base.generate()
+                return this.base.base
             case 'css':
                 return this.cssOverlay.gradient
         }
