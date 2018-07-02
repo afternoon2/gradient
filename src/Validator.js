@@ -33,6 +33,7 @@ export default class Validator {
          * @private
          */
         this._modes = [
+            'none',
             'lch',
             'lab',
             'rgb',

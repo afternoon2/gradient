@@ -9,7 +9,7 @@
                         "safari >= 7"
                     ]
                 },
-                "modules": false
+                "modules": "umd"
             }
         ]
     ]
