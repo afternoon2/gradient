@@ -17,9 +17,11 @@ npm install --save-dev gradient-maker
 ```
 
 ## Usage
-GradientMaker class takes 3 parameters: hex or rgba (in css format) string colors array, configuration object and mode, so it knows which type of output should it produce. 
+`GradientMaker.gradient` function takes 3 parameters: hex or rgba (in css format) string colors array, configuration object and mode, so it knows which type of output should it produce. 
 ```javascript
-const gradientMaker = new GradientMaker([
+const gradientMaker = new GradientMaker()
+
+const gradient = gradientMaker.gradient([
     '#ffcc00',
     '#3412f0'
 ], {
@@ -29,35 +31,40 @@ const gradientMaker = new GradientMaker([
     left: 10,
     extent: 'farthest-side'
 }, 'css')
-
-const gradient = gradientMaker.gradient()
 ```
 
 ## Configuration format:
 ```javascript
 {
-    // required
-    // options for chroma-js gradient generation ('raw' mode options)
     base: {
-        interpolation: 'linear' | 'bezier',
-        mode: 'none' | 'lch' | 'lab' | 'rgb' | 'hsv' | 'hsl' | 'hsi' | 'hcl', // ignored with 'bezier' interpolation
-        samples: number,  // size of the raw output array
-        lightnessCorrection: boolean
+        interpolation: 'bezier',
+        mode: 'none',
+        samples: 10
+        lightnessCorrection: true
     },
-    // options for css gradient generation (optional)
     css: {
-        type: 'linear' | 'radial', // required
-        angle: number, // optional, only for linear gradients
-        // properties for radial gradient:
-        shape: 'circle' | 'ellipse', // required
-        top: number
-        left: number
-        // ignored when the shape is a circle:
-        extent: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side'
-    },
-    svg: {
         type: 'linear' | 'radial',
-        stops: number[] // must have extactly the same length as the colors array
+        angle: number,
+        shape: 'ellipse',
+        top: 44
+        left: 30
+        extent: 'farthest-side'
     }
 }
 ```
+
+### Base configuration
+Base entry in the configuration object is mandatory. Without it, the gradient maker couldn't produce any output.
+- `interpolation` - 'linear' | 'bezier'
+- `mode` - 'none' | 'lch' | 'lab' | 'rgb' | 'hsv' | 'hsl' | 'hsi' | 'hcl' (this entry is ignored when the interpolation is set to 'bezier')
+- `samples` - number of output step colors
+- `lightnessCorrection` - boolean, decides whether to use chroma `correctLightness()` function
+
+### Css configuration
+Css entry in the configuration object is mandatory if you want to get css gradient string as an output
+- `type`: 'linear' | 'radial'
+- `angle`: number, it will be ignored if you choose the radial gradient type
+- `shape`: 'ellipse' | 'circle' - ignored if you choose linear gradient type. Mandatory for radial gradients
+- `top`: number within percentage range (top position of the radial gradient)
+- `left`: number within percentage range (top position of the radial gradient)
+- `extent`: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side' - extent keyword (optional, ignored if the shape is set to 'circle')
