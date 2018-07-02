@@ -26,6 +26,21 @@ export default class Validator {
          * @private
          */
         this._rgba = /(rgba\()(([0-9]+\,\s?)+([0-9]?\.?[0-9]+)\))/
+
+        /**
+         * @property {string[]} _modes
+         * Modes for the base generation
+         * @private
+         */
+        this._modes = [
+            'lch',
+            'lab',
+            'rgb',
+            'hsv',
+            'hsl',
+            'hsi',
+            'hcl'
+        ]
     }
 
     /**
@@ -84,16 +99,7 @@ export default class Validator {
                 options.interpolation !== 'linear' &&
                 options.interpolation !== 'bezier'
             ) ||
-            (
-                options.mode !== 'none' &&
-                options.mode !== 'lch' &&
-                options.mode !== 'lab' &&
-                options.mode !== 'rgb' &&
-                options.mode !== 'hsv' &&
-                options.mode !== 'hsl' &&
-                options.mode !== 'hsi' &&
-                options.mode !== 'hcl'
-            ) ||
+            this._modes.findIndex(mode => mode === options.mode) === -1 ||
             typeof options.samples !== 'number' ||
             typeof options.lightnessCorrection !== 'boolean'
         ) {
