@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Overlay.js</title>
+    <title>JSDoc: Class: Base</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,47 +17,207 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Overlay.js</h1>
+    <h1 class="page-title">Class: Base</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import Validator from './Validator'
+        <h2><span class="attribs"><span class="type-signature">(private) </span></span>Base<span class="signature">(colors, options)</span><span class="type-signature"></span></h2>
+        
+            <div class="class-description">provides base array of gradient data</div>
+        
+    
+</header>
 
-/**
- * @class Overlay
- * @classdesc Foundational overlay class
- * @param {number[][]} colors - converted colors array
- * @param {object} options - options object specific for the overlay
- * @private
- */
-export default class Overlay {
-    constructor(colors, options) {
-        this.colors = colors
-        this.options = options
+<article>
+    <div class="container-overview">
+    
+        
 
-        /**
-         * Validator class instance
-         * @private
-         */
-        this._validator = new Validator()
-        this._checkOptions()
-    }
+    
+    <h2>Constructor</h2>
+    
 
-    /**
-     * Validates provided options
-     * @private
-     */
-    _checkOptions() {
-        this._validator._validateOptions(this.options)
-    }
-}</code></pre>
-        </article>
-    </section>
+    
+    <h4 class="name" id="Base"><span class="type-signature">(private) </span>new Base<span class="signature">(colors, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>colors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;string></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">input colors</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">base configuration object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="base_Base.js.html">base/Base.js</a>, <a href="base_Base.js.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

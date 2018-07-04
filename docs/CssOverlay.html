@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: Overlay.js</title>
+    <title>JSDoc: Class: CssOverlay</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,47 +17,214 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: Overlay.js</h1>
+    <h1 class="page-title">Class: CssOverlay</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import Validator from './Validator'
+        <h2><span class="attribs"><span class="type-signature"></span></span>CssOverlay<span class="signature">(colors, options)</span><span class="type-signature"></span></h2>
+        
+    
+</header>
 
-/**
- * @class Overlay
- * @classdesc Foundational overlay class
- * @param {number[][]} colors - converted colors array
- * @param {object} options - options object specific for the overlay
- * @private
- */
-export default class Overlay {
-    constructor(colors, options) {
-        this.colors = colors
-        this.options = options
+<article>
+    <div class="container-overview">
+    
+        
 
-        /**
-         * Validator class instance
-         * @private
-         */
-        this._validator = new Validator()
-        this._checkOptions()
-    }
+    
 
-    /**
-     * Validates provided options
-     * @private
-     */
-    _checkOptions() {
-        this._validator._validateOptions(this.options)
-    }
-}</code></pre>
-        </article>
-    </section>
+    
+    <h4 class="name" id="CssOverlay"><span class="type-signature"></span>new CssOverlay<span class="signature">(colors, options)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>colors</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;Array.&lt;number>></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Css overlay class that returns single gradient strings</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="css_CssOverlay.js.html">css/CssOverlay.js</a>, <a href="css_CssOverlay.js.html#line3">line 3</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li><a href="Overlay.html">Overlay</a></li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

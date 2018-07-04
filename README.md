@@ -73,4 +73,4 @@ Css entry in the configuration object is mandatory if you want to get css gradie
 If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.
 
 ### Note about opacity
-Remember that if you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency.
+Remember that if you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency. You can also set blend mode to get desired visual effect.

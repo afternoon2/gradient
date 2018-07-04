@@ -61,7 +61,23 @@ const gradient = gradientMaker.gradient([
     top: 20,
     left: 10,
     extent: 'farthest-side'
-})</code></pre><h2>Configuration format:</h2><pre class="prettyprint source lang-javascript"><code>{
+})</code></pre><h2>Configuration format</h2><h3>Base</h3><p>Base entry in the configuration object is mandatory. Without it, the gradient maker couldn't produce any output.</p>
+<ul>
+<li><code>interpolation</code> - 'linear' | 'bezier'</li>
+<li><code>mode</code> - 'none' | 'lch' | 'lab' | 'rgb' | 'hsv' | 'hsl' | 'hsi' | 'hcl' (this entry is ignored when the interpolation is set to 'bezier')</li>
+<li><code>samples</code> - number of output step colors</li>
+<li><code>lightnessCorrection</code> - boolean, decides whether to use chroma <code>correctLightness()</code> function</li>
+</ul>
+<h3>Css</h3><p>Css entry in the configuration object is mandatory if you want to get css gradient string as an output</p>
+<ul>
+<li><code>type</code>: 'linear' | 'radial'</li>
+<li><code>angle</code>: number, ignored if you choose the radial gradient type</li>
+<li><code>shape</code>: 'ellipse' | 'circle' - ignored if you choose the linear gradient type. Mandatory for radial gradients</li>
+<li><code>top</code>: number within percentage range (top position of the radial gradient)</li>
+<li><code>left</code>: number within percentage range (left position of the radial gradient)</li>
+<li><code>extent</code>: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side' - extent keyword (optional, ignored if the shape is set to 'circle')</li>
+</ul>
+<h2>Configuration example</h2><pre class="prettyprint source lang-javascript"><code>{
     base: {
         interpolation: 'bezier',
         mode: 'none',
@@ -76,22 +92,8 @@ const gradient = gradientMaker.gradient([
         left: 30
         extent: 'farthest-side'
     }
-}</code></pre><h3>Base configuration</h3><p>Base entry in the configuration object is mandatory. Without it, the gradient maker couldn't produce any output.</p>
-<ul>
-<li><code>interpolation</code> - 'linear' | 'bezier'</li>
-<li><code>mode</code> - 'none' | 'lch' | 'lab' | 'rgb' | 'hsv' | 'hsl' | 'hsi' | 'hcl' (this entry is ignored when the interpolation is set to 'bezier')</li>
-<li><code>samples</code> - number of output step colors</li>
-<li><code>lightnessCorrection</code> - boolean, decides whether to use chroma <code>correctLightness()</code> function</li>
-</ul>
-<h3>Css configuration</h3><p>Css entry in the configuration object is mandatory if you want to get css gradient string as an output</p>
-<ul>
-<li><code>type</code>: 'linear' | 'radial'</li>
-<li><code>angle</code>: number, ignored if you choose the radial gradient type</li>
-<li><code>shape</code>: 'ellipse' | 'circle' - ignored if you choose the linear gradient type. Mandatory for radial gradients</li>
-<li><code>top</code>: number within percentage range (top position of the radial gradient)</li>
-<li><code>left</code>: number within percentage range (left position of the radial gradient)</li>
-<li><code>extent</code>: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side' - extent keyword (optional, ignored if the shape is set to 'circle')</li>
-</ul></article>
+}</code></pre><p>If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.</p>
+<h3>Note about opacity</h3><p>Remember that if you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency. You can also set blend mode to get desired visual effect.</p></article>
     </section>
 
 
@@ -102,13 +104,13 @@ const gradient = gradientMaker.gradient([
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="Overlay.html">Overlay</a></li><li><a href="Validator.html">Validator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_checkOptions">_checkOptions</a></li><li><a href="global.html#_find">_find</a></li><li><a href="global.html#_findInvalidString">_findInvalidString</a></li><li><a href="global.html#_getMultipleGradients">_getMultipleGradients</a></li><li><a href="global.html#_getOptionsType">_getOptionsType</a></li><li><a href="global.html#_getSingleGradient">_getSingleGradient</a></li><li><a href="global.html#_isMixedArray">_isMixedArray</a></li><li><a href="global.html#_validateBaseOptions">_validateBaseOptions</a></li><li><a href="global.html#_validateColors">_validateColors</a></li><li><a href="global.html#_validateCssOptions">_validateCssOptions</a></li><li><a href="global.html#_validateOptions">_validateOptions</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="Overlay.html">Overlay</a></li><li><a href="Validator.html">Validator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_angle">_angle</a></li><li><a href="global.html#_bezierInterpolationScale">_bezierInterpolationScale</a></li><li><a href="global.html#_checkOptions">_checkOptions</a></li><li><a href="global.html#_createBase">_createBase</a></li><li><a href="global.html#_createScale">_createScale</a></li><li><a href="global.html#_extent">_extent</a></li><li><a href="global.html#_find">_find</a></li><li><a href="global.html#_findInvalidString">_findInvalidString</a></li><li><a href="global.html#_getMultipleGradients">_getMultipleGradients</a></li><li><a href="global.html#_getOptionsType">_getOptionsType</a></li><li><a href="global.html#_getSingleGradient">_getSingleGradient</a></li><li><a href="global.html#_isMixedArray">_isMixedArray</a></li><li><a href="global.html#_linearInterpolationScale">_linearInterpolationScale</a></li><li><a href="global.html#_normalize">_normalize</a></li><li><a href="global.html#_removeClippedValues">_removeClippedValues</a></li><li><a href="global.html#_roundRgbaValues">_roundRgbaValues</a></li><li><a href="global.html#_shape">_shape</a></li><li><a href="global.html#_stringifyColors">_stringifyColors</a></li><li><a href="global.html#_validateBaseOptions">_validateBaseOptions</a></li><li><a href="global.html#_validateColors">_validateColors</a></li><li><a href="global.html#_validateCssOptions">_validateCssOptions</a></li><li><a href="global.html#_validateOptions">_validateOptions</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jul 04 2018 10:41:57 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Jul 04 2018 15:48:01 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
