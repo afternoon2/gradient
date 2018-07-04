@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "rollup -c",
-    "test": "jest"
+    "test": "jest",
+    "docs": "./node_modules/.bin/jsdoc -p ./src -d ./docs --readme ./README.md"
   },
   "keywords": [
     "css",

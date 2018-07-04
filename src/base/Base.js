@@ -17,8 +17,8 @@ export default class Base {
          * @property {Validator} _validator - Valiator class instance 
          */
         this._validator = new Validator()
-        this._validator.validateColors(this.colors)
-        this._validator.validateOptions(this.options)
+        this._validator._validateColors(this.colors)
+        this._validator._validateOptions(this.options)
     }
 
     get base() {

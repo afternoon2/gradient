@@ -10,6 +10,7 @@ export default class GradientMaker {
      * Generates gradient depending on the options provided
      * @param {string[]} colors - array of colors as strings in hex or css rgba format
      * @param {object} options
+     * @returns {void}
      * @example
      * const maker = new GradientMaker()
      * const gradient = maker.gradient(hexColors, options)
@@ -21,6 +22,12 @@ export default class GradientMaker {
         return this._getMultipleGradients(colors, options)
     }
 
+    /**
+     * Returns single raw and/or css gradient
+     * @param {string[]} colors 
+     * @param {object} options
+     * @private 
+     */
     _getSingleGradient(colors, options) {
         const _base = new Base(colors, options.base)
         if (
@@ -37,6 +44,12 @@ export default class GradientMaker {
         }
     }
 
+    /**
+     * Returns multiple raw and/or css gradients
+     * @param {string[]} colors 
+     * @param {object} options
+     * @private 
+     */
     _getMultipleGradients(colors, options) {
         const gradients = []
         options.forEach(opt => {

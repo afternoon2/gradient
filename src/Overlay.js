@@ -25,6 +25,6 @@ export default class Overlay {
      * @private
      */
     _checkOptions() {
-        this._validator.validateOptions(this.options)
+        this._validator._validateOptions(this.options)
     }
 }

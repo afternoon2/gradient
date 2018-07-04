@@ -15,7 +15,7 @@ test(
             'Me too!'
         ]
         const safeValidation = () => {
-            validator.validateColors(fakeColors)
+            validator._validateColors(fakeColors)
         }
         expect(safeValidation).toThrowError('Wrong input format')
     }
@@ -29,7 +29,7 @@ test(
             '#fcf01f'
         ]
         const safeValidation = () => {
-            validator.validateColors(mixedColors)
+            validator._validateColors(mixedColors)
         }
         expect(safeValidation).toThrowError('Colors array contains strings')
     }
@@ -46,7 +46,7 @@ test(
             lightnessCorrection: 1
         }
         const safeValidation = () => {
-            validator.validateOptions(fakeOptions)
+            validator._validateOptions(fakeOptions)
         }
         expect(safeValidation).toThrowError('Invalid input object')
     }
@@ -60,7 +60,7 @@ test(
             shape: 'circle'
         }
         const safeValidation = () => {
-            validator.validateOptions(fakeOptions)
+            validator._validateOptions(fakeOptions)
         }
         expect(safeValidation).toThrowError('Invalid options ')
     }
@@ -75,7 +75,7 @@ test(
             left: 20
         }
         const safeValidation = () => {
-            validator.validateOptions(fakeOptions)
+            validator._validateOptions(fakeOptions)
         }
         expect(safeValidation).toThrowError('No shape provided')
     }
@@ -90,7 +90,7 @@ test(
             angle: 710
         }
         const safeValidation = () => {
-            validator.validateOptions(fakeOptions)
+            validator._validateOptions(fakeOptions)
         }
         expect(safeValidation).toThrowError('Invalid angle property provided')
     }
@@ -106,7 +106,7 @@ test(
             left: 2000000
         }
         const safeValidation = () => {
-            validator.validateOptions(fakeOptions)
+            validator._validateOptions(fakeOptions)
         }
         expect(safeValidation).toThrowError('Invalid top and/or left properties')
     }
