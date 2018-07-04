@@ -17,7 +17,7 @@ npm install --save-dev gradient-maker
 ```
 
 ## Usage
-`GradientMaker.gradient` function takes 3 parameters: hex or rgba (in css format) string colors array, configuration object and mode, so it knows which type of output should it produce. 
+`GradientMaker.gradient` function takes 2 parameters: hex or rgba (in css format) string colors array and configuration object.
 ```javascript
 const gradientMaker = new GradientMaker()
 
@@ -30,7 +30,7 @@ const gradient = gradientMaker.gradient([
     top: 20,
     left: 10,
     extent: 'farthest-side'
-}, 'css')
+})
 ```
 
 ## Configuration format:

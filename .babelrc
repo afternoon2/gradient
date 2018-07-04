@@ -9,8 +9,13 @@
                         "safari >= 7"
                     ]
                 },
-                "modules": "umd"
+                "modules": false
             }
         ]
-    ]
+    ],
+    "env": {
+        "test": {
+            "presets": ["env"]
+        }
+    }
 }
