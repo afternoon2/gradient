@@ -43,7 +43,7 @@ const gradient = gradientMaker.gradient([
         lightnessCorrection: true
     },
     css: {
-        type: 'linear' | 'radial',
+        type: 'radial',
         angle: number,
         shape: 'ellipse',
         top: 44
@@ -63,8 +63,8 @@ Base entry in the configuration object is mandatory. Without it, the gradient ma
 ### Css configuration
 Css entry in the configuration object is mandatory if you want to get css gradient string as an output
 - `type`: 'linear' | 'radial'
-- `angle`: number, it will be ignored if you choose the radial gradient type
-- `shape`: 'ellipse' | 'circle' - ignored if you choose linear gradient type. Mandatory for radial gradients
+- `angle`: number, ignored if you choose the radial gradient type
+- `shape`: 'ellipse' | 'circle' - ignored if you choose the linear gradient type. Mandatory for radial gradients
 - `top`: number within percentage range (top position of the radial gradient)
-- `left`: number within percentage range (top position of the radial gradient)
+- `left`: number within percentage range (left position of the radial gradient)
 - `extent`: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side' - extent keyword (optional, ignored if the shape is set to 'circle')

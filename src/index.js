@@ -17,9 +17,8 @@ export default class GradientMaker {
     gradient(colors, options) {
         if (!Array.isArray(options)) {
             return this._getSingleGradient(colors, options)
-        } else {
-            return this._getMultipleGradients(colors, options)
         }
+        return this._getMultipleGradients(colors, options)
     }
 
     _getSingleGradient(colors, options) {
