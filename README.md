@@ -50,7 +50,7 @@ Css entry in the configuration object is mandatory if you want to get css gradie
 - `left`: number within percentage range (left position of the radial gradient)
 - `extent`: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side' - extent keyword (optional, ignored if the shape is set to 'circle')
 
-## Configuration example
+### Configuration example
 ```javascript
 {
     base: {
@@ -70,6 +70,7 @@ Css entry in the configuration object is mandatory if you want to get css gradie
 }
 ```
 
+### Multiple gradients
 If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.
 
 ### Note about opacity
