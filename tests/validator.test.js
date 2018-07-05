@@ -111,3 +111,40 @@ test(
         expect(safeValidation).toThrowError('Invalid top and/or left properties')
     }
 )
+
+// Svg options 
+test(
+    'If validator throws an error on invalid svg gradient type',
+    () => {
+        const fakeOptions = {
+            type: 'fakeType',
+            id: 'some id',
+            x1: 0,
+            y1: 0,
+            x2: 100,
+            y2: 100
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Invalid svg gradient type')
+    }
+)
+
+test(
+    'If validator throws an error on invalid identifier',
+    () => {
+        const fakeOptions = {
+            type: 'linear',
+            id: 122,
+            x1: 0,
+            y1: 0,
+            x2: 100,
+            y2: 100
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Invalid svg gradient identifier')
+    }
+)

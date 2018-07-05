@@ -1,5 +1,6 @@
 import baseMessages from './base/messages'
 import cssMessages from './css/messages'
+import svgMessages from './svg/messages'
 
 
 /**
@@ -72,6 +73,10 @@ export default class Validator {
             break
         case 'css':
             this._validateCssOptions(options)
+            break
+        case 'svg':
+            this._validateSvgOptions(options)
+            break
         }
     }
 
@@ -84,8 +89,10 @@ export default class Validator {
     _getOptionsType(options) {
         if (options.interpolation) {
             return 'base'
-        } else if (options.type) {
+        } else if (options.type && !options.id) {
             return 'css'
+        } else if (options.type && options.id) {
+            return 'svg'
         } else {
             throw new Error('Invalid options provided')
         }
@@ -176,6 +183,31 @@ export default class Validator {
             (options.angle < 0 || options.angle > 359)
         ) {
             throw new Error(cssMessages.invalidAngle)
+        }
+    }
+
+    /**
+     * Makes svg options validation
+     * @param {SvgOptions} options - options to validate
+     * @private
+     */
+    _validateSvgOptions(options) {
+        if (
+            !options.type ||
+            typeof options.type !== 'string' ||
+            (
+                options.type !== 'linear' &&
+                options.type !== 'radial'
+            )
+        ) {
+            throw new Error(svgMessages.invalidGradientType)
+        }
+
+        if (
+            !options.id ||
+            typeof options.id !== 'string'
+        ) {
+            throw new Error(svgMessages.invalidIdentifier)
         }
     }
 }
