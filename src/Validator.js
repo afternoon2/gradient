@@ -209,5 +209,28 @@ export default class Validator {
         ) {
             throw new Error(svgMessages.invalidIdentifier)
         }
+
+        if (
+            options.type === 'linear' &&
+            (
+                !options.x1 ||
+                !options.y1 ||
+                !options.x2 ||
+                !options.y2
+            )
+        ) {
+            throw new Error(svgMessages.missingLinearCoordinates)
+        }
+
+        if (
+            options.type === 'radial' &&
+            (
+                !options.cx ||
+                !options.cy ||
+                !options.r
+            )
+        ) {
+            throw new Error(svgMessages.missingRadialCoordinates)
+        }
     }
 }
