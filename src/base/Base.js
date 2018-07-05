@@ -2,10 +2,18 @@ import chroma from 'chroma-js'
 import Validator from '../Validator'
 
 /**
+ * @typedef {object} BaseOptions - Base component's configuration object
+ * @property {string} interpolation - 'linear' or 'bezier'
+ * @property {string} mode - 'none', 'lch', 'lab', 'rgb', 'hsv', 'hsl', 'hsi', or 'hcl'
+ * @property {number} samples - number of output colors
+ * @property {boolean} lightnessCorrection - lightness correction applier
+ */
+
+/**
  * @class Base
  * @classdesc provides base array of gradient data
  * @param {string[]} colors - input colors
- * @param {object} options - base configuration object
+ * @param {BaseOptions} options - base configuration object
  * @private
  */
 export default class Base {

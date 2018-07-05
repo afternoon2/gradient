@@ -1,6 +1,7 @@
 import baseMessages from './base/messages'
 import cssMessages from './css/messages'
 
+
 /**
  * @class Validator
  * @classdesc Validation module
@@ -9,8 +10,7 @@ import cssMessages from './css/messages'
 export default class Validator {
     constructor() {
         /**
-         * Regular expression type
-         * @typedef {stringlike} RegExp
+         * @typedef {stringlike} RegExp - regular expression type
          */
 
         /**
@@ -61,7 +61,7 @@ export default class Validator {
 
     /**
      * Makes options (configration) object validation, regardless the mode
-     * @param {object} options - options object to validate
+     * @param {CssOptions|BaseOptions|SvgOptions} options - options object to validate
      * @protected
      */
     _validateOptions(options) {

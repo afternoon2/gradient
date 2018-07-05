@@ -1,11 +1,21 @@
 import Overlay from '../Overlay'
 
 /**
+ * @typedef {object} CssOptions - CssOverlay component's configuration object
+ * @property {string} type - 'linear' or 'radial'
+ * @property {number} [angle] - linear gradient's angle value
+ * @property {number} [left] - radial gradient's position on the x axis
+ * @property {number} [top] - radial gradient's position on the y axis
+ * @property {string} [shape] - radial gradient's shape: 'ellipse' or 'circle' (mandatory for radial gradient)
+ * @property {string} [extent] - radial gradient's extent keyword
+ */
+
+/**
  * @class CssOverlay
  * @extends Overlay
  * @classdesc
  * @param {number[][]} colors
- * @param {object} options
+ * @param {CssOptions} options
  * Css overlay class that returns single gradient strings
  */
 export default class CssOverlay extends Overlay {
