@@ -1,19 +1,19 @@
 # Gradient Maker
-## Gradient creation library running in the browser
+## Gradient creation library running in the browser 🖌🌈
 
 Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from `raw`, `css` or `svg`.
 
 Gradient maker uses `chroma-js` color manipulation library for gradient generation (Copyright (c) 2011-2017, Gregor Aisch).
 
 ## Contents
-- [Installation](#Installation)
-- [Usage](#Usage)
-- [Parameters](#Parameters)
-    - [Colors array](#Colors)
-    - [Options](#Options)
-        - [Base](#Base)
-        - [Css](#Css)
-        - [Svg](#Svg)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Parameters](#arameters)
+    - [Colors array](#colors)
+    - [Options](#options)
+        - [Base](#base)
+        - [Css](#css)
+        - [Svg](#svg)
 
 ## Installation
 
