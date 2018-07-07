@@ -10,5 +10,11 @@ export default {
     `,
     missingRadialCoordinates: `
         Missing svg radial gradient\'s coordinates
+    `,
+    invalidSpreadMethod: `
+        Invalid spread method property provided
+    `,
+    invalidFocalPoint: `
+        Invalid focal point coordinates provided
     `
 }

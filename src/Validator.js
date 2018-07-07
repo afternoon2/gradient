@@ -2,7 +2,6 @@ import baseMessages from './base/messages'
 import cssMessages from './css/messages'
 import svgMessages from './svg/messages'
 
-
 /**
  * @class Validator
  * @classdesc Validation module
@@ -220,6 +219,30 @@ export default class Validator {
             )
         ) {
             throw new Error(svgMessages.missingLinearCoordinates)
+        }
+
+        if (
+            options.type === 'radial' &&
+            options.spreadMethod &&
+            (
+                options.spreadMethod !== 'pad' ||
+                options.spreadMethod !== 'repeat' ||
+                options.spreadMethod !== 'reflect' ||
+                typeof options.spreadMethod !== 'string'
+            )
+        ) {
+            throw new Error(svgMessages.invalidSpreadMethod)
+        } 
+        if (
+            options.type === 'radial' &&
+            options.fx &&
+            options.fy &&
+            (
+                typeof options.fx !== 'number' ||
+                typeof options.fy !== 'number'
+            )
+        ) {
+            throw new Error(svgMessages.invalidFocalPoint)
         }
 
         if (

@@ -176,3 +176,57 @@ test(
         expect(safeValidation).toThrowError('Missing svg radial gradient\'s coord')
     }
 )
+
+test(
+    'If validator throws an error when the svg gradient type is radial while there are invalid coordinates provided',
+    () => {
+        const fakeOptions = {
+            type: 'radial',
+            id: 'identifier',
+            cx: 'some string',
+            cy: 0,
+            r: 10
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Missing svg radial gradient\'s coord')
+    }
+)
+
+test(
+    'If validator throws an error when the svg gradient type is radial while there is invalid spread method property provided',
+    () => {
+        const fakeOptions = {
+            type: 'radial',
+            id: 'identifier',
+            cx: 0,
+            cy: 0,
+            r: 10,
+            spreadMethod: 'some other spread method'
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Invalid spread method property ')
+    }
+)
+
+test(
+    'If validator throws an error when the svg gradient type is radial and the focal point coordinates are invalid',
+    () => {
+        const fakeOptions = {
+            type: 'radial',
+            id: 'id',
+            cx: 0,
+            cy: 0,
+            r: 20,
+            fx: 'some',
+            fy: 'fake focal'
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Invalid focal point coordinates')
+    }
+)
