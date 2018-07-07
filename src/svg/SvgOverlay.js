@@ -52,7 +52,10 @@ export default class SvgOverlay extends Overlay {
     _createStop(color) {
         const stop = this._svgElement('stop')
         stop.setAttribute('offset', `${100 / this.colors.length}%`)
-        stop.setAttribute('stop-color', `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] ? color[3] : 1})`)
+        stop.setAttribute(
+            'stop-color', 
+            `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] ? color[3] : 1})`
+        )
         return stop
     }
 

@@ -1,9 +1,19 @@
 # Gradient Maker
-### No UI gradient maker that runs in the browser
+## Gradient creation library running in the browser
 
-Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from `raw`, `css`, `svg` or `canvas`.
+Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from `raw`, `css` or `svg`.
 
 Gradient maker uses `chroma-js` color manipulation library for gradient generation (Copyright (c) 2011-2017, Gregor Aisch).
+
+## Contents
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Parameters](#Parameters)
+    - [Colors array](#Colors)
+    - [Options](#Options)
+        - [Base](#Base)
+        - [Css](#Css)
+        - [Svg](#Svg)
 
 ## Installation
 
@@ -21,34 +31,76 @@ npm install --save-dev gradient-maker
 ```javascript
 const gradientMaker = new GradientMaker()
 
-const gradient = gradientMaker.gradient([
-    '#ffcc00',
-    '#3412f0'
-], {
-    type: 'radial',
-    shape: 'ellipse',
-    top: 20,
-    left: 10,
-    extent: 'farthest-side'
-})
+const gradient = gradientMaker.gradient(colors, options)
 ```
 
-## Configuration format
-### Base
-Base entry in the configuration object is mandatory. Without it, the gradient maker couldn't produce any output.
-- `interpolation` - 'linear' | 'bezier'
-- `mode` - 'none' | 'lch' | 'lab' | 'rgb' | 'hsv' | 'hsl' | 'hsi' | 'hcl' (this entry is ignored when the interpolation is set to 'bezier')
-- `samples` - number of output step colors
-- `lightnessCorrection` - boolean, decides whether to use chroma `correctLightness()` function
+## Parameters
+### Colors
+Colors input should be an array of strings in hexadecimal or css rgba format. No mixed type arrays are accepted.
 
-### Css
-Css entry in the configuration object is mandatory if you want to get css gradient string as an output
-- `type`: 'linear' | 'radial'
-- `angle`: number, ignored if you choose the radial gradient type
-- `shape`: 'ellipse' | 'circle' - ignored if you choose the linear gradient type. Mandatory for radial gradients
-- `top`: number within percentage range (top position of the radial gradient)
-- `left`: number within percentage range (left position of the radial gradient)
-- `extent`: 'farthest-side', 'closest-side', 'farthest-corner', 'farthest-side' - extent keyword (optional, ignored if the shape is set to 'circle')
+Please note, that input colors are the source for further creation of probably bigger amount of output colors, so try to insert max. 5 colors as an input for better visual effect.
+
+### Options
+
+Options object consists of one required and two optional entries. 
+
+#### Base
+The required one, called `base`, stands for the basic settings of the gradient creation, mandatory for the chroma-js library. Its' interface looks like this:
+
+```typescript
+{
+    interpolation: 'linear' | 'bezier'
+    mode: 'none' | 'lch' | 'lab' | 'rgb' | 'hsv' | 'hsl' | 'hsi' | 'hcl'
+    samples: number
+    lightnessCorrection: boolean
+}
+```
+`mode` entry is ommited when the interpolation is set to `bezier`.
+
+Usefullness of setting the lightness correction to `true` (combined with the `bezier` interpolation) is [very well described by Gregor Aisch here](https://www.vis4.net/blog/2013/09/mastering-multi-hued-color-scales/).
+
+`samples` stands for the number of the output's colors. The more you set, the nicer gradient you get (but with worse performance of course).
+
+#### Css
+Css entry in the configuration object is mandatory if you want to get css gradient string as an output.
+
+```typescript
+{
+    type: 'linear' | 'radial'
+    angle?: number // between 0 and 359
+    shape: 'ellipse' | 'circle'
+    top?: number
+    left?: number
+    extent?: 'farthest-side' | 'closest-side' | 'farthest-corner' | 'farthest-side'
+}
+```
+The `angle` is ommited when the `type` is set to `radial`.
+
+The `extent` keyword is ignored if the shape is set to the `circle` and the `type` is set to `linear`.
+
+When you set the `type` to `radial`, you must provide valid `shape` property.
+
+#### Svg
+
+Svg gradients API is much more tricker than css. Here's the interface for the svg options object
+
+```typescript
+{
+    type: 'linear' | 'radial',
+    id: string
+    angle: number // in 0-359 range, TBD
+    x1?: number
+    y1?: number
+    x2?: number
+    y2?: number
+    cx?: number
+    cy?: number
+    r?: number
+    fx?: number
+    fy?: number
+    spreadMethod?: 'pad' | 'repeat' | 'reflect'
+}
+```
 
 ### Configuration example
 ```javascript
@@ -56,15 +108,15 @@ Css entry in the configuration object is mandatory if you want to get css gradie
     base: {
         interpolation: 'bezier',
         mode: 'none',
-        samples: 10
+        samples: 10,
         lightnessCorrection: true
     },
     css: {
         type: 'radial',
         angle: number,
         shape: 'ellipse',
-        top: 44
-        left: 30
+        top: 44,
+        left: 30,
         extent: 'farthest-side'
     }
 }
