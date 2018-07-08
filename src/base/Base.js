@@ -14,7 +14,6 @@ import Validator from '../Validator'
  * @classdesc provides base array of gradient data
  * @param {string[]} colors - input colors
  * @param {BaseOptions} options - base configuration object
- * @private
  */
 export default class Base {
     constructor(colors, options) {
@@ -33,6 +32,7 @@ export default class Base {
      * @returns {number[][]}
      * @description
      * It returns an array of arrays of normalized rgba values
+     * @protected
      */
     get base() {
         const scale = this._createScale()
@@ -116,7 +116,8 @@ export default class Base {
     /**
      * 
      * @param {any} entry
-     * Helps with filtering out the clipped boolean values from the chroma base object 
+     * Helps with filtering out the clipped boolean values from the chroma base object
+     * @private
      */
     _removeClippedValues(entry) {
         if (typeof entry !== 'boolean') {
@@ -141,6 +142,7 @@ export default class Base {
      * @returns {number}
      * @param {number} val 
      * Rounds the rgba values up to to the second position
+     * @private
      */
     _roundRgbaValues(val) {
         return Math.round(val * 100) / 100

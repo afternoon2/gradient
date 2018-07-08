@@ -29,6 +29,10 @@ export default class SvgOverlay extends Overlay {
         super(colors, options)
     }
 
+    /**
+     * Creates full svg gradient element with color stops
+     * @returns {SVGElement}
+     */
     get gradient() {
         const gradient = this._gradientElement(this.options.type)
         const stops = this._stops()
@@ -36,6 +40,12 @@ export default class SvgOverlay extends Overlay {
         return gradient
     }
 
+    /**
+     * Creates svg gradient element
+     * @param {string} type - linear or radial
+     * @returns {SvgGradientElement}
+     * @private
+     */
     _gradientElement(type) {
         const gradient = this._svgElement(`${type}Gradient`)
         const attrs = /((id)|([c|f|x|y|r][x|y|1|2]?))/
@@ -45,10 +55,21 @@ export default class SvgOverlay extends Overlay {
         return gradient
     }
 
+    /**
+     * Maps colors to stops
+     * @returns {SvgElement[]}
+     * @private
+     */
     _stops() {
         return this.colors.map(color => this._createStop(color))
     }
 
+    /**
+     * Creates single stop element
+     * @param {number[]} color 
+     * @returns {SvgElement}
+     * @private
+     */
     _createStop(color) {
         const stop = this._svgElement('stop')
         stop.setAttribute('offset', `${100 / this.colors.length}%`)
@@ -59,6 +80,12 @@ export default class SvgOverlay extends Overlay {
         return stop
     }
 
+    /**
+     * Creates chosen Svg element
+     * @param {string} type - type of the NS element
+     * @returns {SvgElement}
+     * @private
+     */
     _svgElement(type) {
         return document.createElementNS(
             'http://www.w3.org/2000/svg',

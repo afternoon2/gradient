@@ -32,18 +32,95 @@
  * @typedef {object} SvgOptions - SvgOverlay component's configuration object
  * @property {string} type - linear or radial
  * @property {id} string - gradient unique identifier
- * @property {number[]} offsets - array with color stop's offset values (percentages)
  * @property {number} [x1] - linear gradient's first point's position on the x axis
  * @property {number} [y1] - linear gradient's first point's position on the y axis
  * @property {number} [x2] - linear gradient's second point's position on the x axis
  * @property {number} [y2] - linear gradient's second point position on the y axis
  * @property {number} [cx] - radial gradient's center point position on the x axis
  * @property {number} [cy] - radial gradient's center point position on the y axis
+ * @property {number} [r] - radial gradient's radius
  * @property {number} [fx] - radial gradient's focal point position on the x axis
  * @property {number} [fy] - radial gradient's focal point position on the y axis
  * @property {string} [spreadMethod] - radial gradient's spread method: 'pad', 'repeat' or 'reflect'
  */
-</code></pre>
+
+/**
+ * @class SvgOverlay
+ * @extends Overlay
+ * @classdesc
+ * Creates Svg gradient elements
+ * @param {number[][]} colors
+ * @param {SvgOptions} options
+ */
+export default class SvgOverlay extends Overlay {
+    constructor(colors, options) {
+        super(colors, options)
+    }
+
+    /**
+     * Creates full svg gradient element with color stops
+     * @returns {SVGElement}
+     */
+    get gradient() {
+        const gradient = this._gradientElement(this.options.type)
+        const stops = this._stops()
+        stops.forEach(stop => gradient.appendChild(stop))
+        return gradient
+    }
+
+    /**
+     * Creates svg gradient element
+     * @param {string} type - linear or radial
+     * @returns {SvgGradientElement}
+     * @private
+     */
+    _gradientElement(type) {
+        const gradient = this._svgElement(`${type}Gradient`)
+        const attrs = /((id)|([c|f|x|y|r][x|y|1|2]?))/
+        Object.entries(this.options)
+            .filter(attr => attrs.test(attr[0]))
+            .forEach(attr => gradient.setAttribute(attr[0], attr[1]))
+        return gradient
+    }
+
+    /**
+     * Maps colors to stops
+     * @returns {SvgElement[]}
+     * @private
+     */
+    _stops() {
+        return this.colors.map(color => this._createStop(color))
+    }
+
+    /**
+     * Creates single stop element
+     * @param {number[]} color 
+     * @returns {SvgElement}
+     * @private
+     */
+    _createStop(color) {
+        const stop = this._svgElement('stop')
+        stop.setAttribute('offset', `${100 / this.colors.length}%`)
+        stop.setAttribute(
+            'stop-color', 
+            `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] ? color[3] : 1})`
+        )
+        return stop
+    }
+
+    /**
+     * Creates chosen Svg element
+     * @param {string} type - type of the NS element
+     * @returns {SvgElement}
+     * @private
+     */
+    _svgElement(type) {
+        return document.createElementNS(
+            'http://www.w3.org/2000/svg',
+            type
+        )
+    }
+}</code></pre>
         </article>
     </section>
 
@@ -53,13 +130,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="Overlay.html">Overlay</a></li><li><a href="Validator.html">Validator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_angle">_angle</a></li><li><a href="global.html#_bezierInterpolationScale">_bezierInterpolationScale</a></li><li><a href="global.html#_checkOptions">_checkOptions</a></li><li><a href="global.html#_createBase">_createBase</a></li><li><a href="global.html#_createScale">_createScale</a></li><li><a href="global.html#_extent">_extent</a></li><li><a href="global.html#_find">_find</a></li><li><a href="global.html#_findInvalidString">_findInvalidString</a></li><li><a href="global.html#_getMultipleGradients">_getMultipleGradients</a></li><li><a href="global.html#_getOptionsType">_getOptionsType</a></li><li><a href="global.html#_getSingleGradient">_getSingleGradient</a></li><li><a href="global.html#_isMixedArray">_isMixedArray</a></li><li><a href="global.html#_linearInterpolationScale">_linearInterpolationScale</a></li><li><a href="global.html#_normalize">_normalize</a></li><li><a href="global.html#_removeClippedValues">_removeClippedValues</a></li><li><a href="global.html#_roundRgbaValues">_roundRgbaValues</a></li><li><a href="global.html#_shape">_shape</a></li><li><a href="global.html#_stringifyColors">_stringifyColors</a></li><li><a href="global.html#_validateBaseOptions">_validateBaseOptions</a></li><li><a href="global.html#_validateColors">_validateColors</a></li><li><a href="global.html#_validateCssOptions">_validateCssOptions</a></li><li><a href="global.html#_validateOptions">_validateOptions</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="SvgOverlay.html">SvgOverlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#base">base</a></li><li><a href="global.html#concat">concat</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jul 05 2018 21:45:15 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jul 08 2018 12:04:16 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

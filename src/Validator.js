@@ -47,7 +47,7 @@ export default class Validator {
     /**
      * Makes colors array validation
      * @param {string[]} colors - colors array 
-     * @protected
+     * @private
      */
     _validateColors(colors) {
         if (this._findInvalidString(colors)) {
@@ -62,7 +62,7 @@ export default class Validator {
     /**
      * Makes options (configration) object validation, regardless the mode
      * @param {CssOptions|BaseOptions|SvgOptions} options - options object to validate
-     * @protected
+     * @private
      */
     _validateOptions(options) {
         const optsType = this._getOptionsType(options)

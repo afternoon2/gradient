@@ -28,7 +28,7 @@
         <article>
             <pre class="prettyprint source linenums"><code>import baseMessages from './base/messages'
 import cssMessages from './css/messages'
-
+import svgMessages from './svg/messages'
 
 /**
  * @class Validator
@@ -75,7 +75,7 @@ export default class Validator {
     /**
      * Makes colors array validation
      * @param {string[]} colors - colors array 
-     * @protected
+     * @private
      */
     _validateColors(colors) {
         if (this._findInvalidString(colors)) {
@@ -90,7 +90,7 @@ export default class Validator {
     /**
      * Makes options (configration) object validation, regardless the mode
      * @param {CssOptions|BaseOptions|SvgOptions} options - options object to validate
-     * @protected
+     * @private
      */
     _validateOptions(options) {
         const optsType = this._getOptionsType(options)
@@ -100,6 +100,10 @@ export default class Validator {
             break
         case 'css':
             this._validateCssOptions(options)
+            break
+        case 'svg':
+            this._validateSvgOptions(options)
+            break
         }
     }
 
@@ -112,8 +116,10 @@ export default class Validator {
     _getOptionsType(options) {
         if (options.interpolation) {
             return 'base'
-        } else if (options.type) {
+        } else if (options.type &amp;&amp; !options.id) {
             return 'css'
+        } else if (options.type &amp;&amp; options.id) {
+            return 'svg'
         } else {
             throw new Error('Invalid options provided')
         }
@@ -206,6 +212,80 @@ export default class Validator {
             throw new Error(cssMessages.invalidAngle)
         }
     }
+
+    /**
+     * Makes svg options validation
+     * @param {SvgOptions} options - options to validate
+     * @private
+     */
+    _validateSvgOptions(options) {
+        if (
+            !options.type ||
+            typeof options.type !== 'string' ||
+            (
+                options.type !== 'linear' &amp;&amp;
+                options.type !== 'radial'
+            )
+        ) {
+            throw new Error(svgMessages.invalidGradientType)
+        }
+
+        if (
+            !options.id ||
+            typeof options.id !== 'string'
+        ) {
+            throw new Error(svgMessages.invalidIdentifier)
+        }
+        if (
+            options.type === 'linear' &amp;&amp;
+            (
+                typeof options.x1 !== 'number' ||
+                typeof options.y1 !== 'number' ||
+                typeof options.x2 !== 'number' ||
+                typeof options.y2 !== 'number'
+            )
+        ) {
+            throw new Error(svgMessages.missingLinearCoordinates)
+        }
+
+        if (
+            options.type === 'radial' &amp;&amp;
+            options.spreadMethod &amp;&amp;
+            (
+                (
+                    options.spreadMethod !== 'pad' &amp;&amp;
+                    options.spreadMethod !== 'repeat' &amp;&amp;
+                    options.spreadMethod !== 'reflect'
+                ) ||
+                typeof options.spreadMethod !== 'string'
+            )
+        ) {
+            throw new Error(svgMessages.invalidSpreadMethod)
+        }
+
+        if (
+            options.type === 'radial' &amp;&amp;
+            options.fx &amp;&amp;
+            options.fy &amp;&amp;
+            (
+                typeof options.fx !== 'number' ||
+                typeof options.fy !== 'number'
+            )
+        ) {
+            throw new Error(svgMessages.invalidFocalPoint)
+        }
+
+        if (
+            options.type === 'radial' &amp;&amp;
+            (
+                typeof options.cx !== 'number' ||
+                typeof options.cy !== 'number' ||
+                typeof options.r !== 'number'
+            )
+        ) {
+            throw new Error(svgMessages.missingRadialCoordinates)
+        }
+    }
 }</code></pre>
         </article>
     </section>
@@ -216,13 +296,13 @@ export default class Validator {
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="Overlay.html">Overlay</a></li><li><a href="Validator.html">Validator</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_angle">_angle</a></li><li><a href="global.html#_bezierInterpolationScale">_bezierInterpolationScale</a></li><li><a href="global.html#_checkOptions">_checkOptions</a></li><li><a href="global.html#_createBase">_createBase</a></li><li><a href="global.html#_createScale">_createScale</a></li><li><a href="global.html#_extent">_extent</a></li><li><a href="global.html#_find">_find</a></li><li><a href="global.html#_findInvalidString">_findInvalidString</a></li><li><a href="global.html#_getMultipleGradients">_getMultipleGradients</a></li><li><a href="global.html#_getOptionsType">_getOptionsType</a></li><li><a href="global.html#_getSingleGradient">_getSingleGradient</a></li><li><a href="global.html#_isMixedArray">_isMixedArray</a></li><li><a href="global.html#_linearInterpolationScale">_linearInterpolationScale</a></li><li><a href="global.html#_normalize">_normalize</a></li><li><a href="global.html#_removeClippedValues">_removeClippedValues</a></li><li><a href="global.html#_roundRgbaValues">_roundRgbaValues</a></li><li><a href="global.html#_shape">_shape</a></li><li><a href="global.html#_stringifyColors">_stringifyColors</a></li><li><a href="global.html#_validateBaseOptions">_validateBaseOptions</a></li><li><a href="global.html#_validateColors">_validateColors</a></li><li><a href="global.html#_validateCssOptions">_validateCssOptions</a></li><li><a href="global.html#_validateOptions">_validateOptions</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="SvgOverlay.html">SvgOverlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#base">base</a></li><li><a href="global.html#concat">concat</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Jul 05 2018 21:45:15 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sun Jul 08 2018 12:04:16 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>
