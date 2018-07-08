@@ -18,4 +18,3 @@ test(
         expect(overlay.gradient).toBeInstanceOf(SVGElement)
     }
 )
-

@@ -22,7 +22,7 @@ Gradient maker uses `chroma-js` color manipulation library for gradient generati
     - [Multiple gradients](#multiple-gradients)
         - [Options object](#options-object)
         - [Concatenation](#concatenation)
-    - [Note about opacity](#note-about-opacity)
+    - [Notes about opacity](#notes-about-opacity)
 
 ## Installation
 
@@ -45,7 +45,14 @@ const gradient = gradientMaker.gradient(colors, options)
 
 ## Parameters
 ### Colors
-Colors input should be an array of strings in hexadecimal or css rgba format. No mixed type arrays are accepted.
+Colors input should be an array of numbers in rgb or rgba format.
+
+```javascript
+[
+    [0, 222, 31, 0.4],
+    [12, 22, 34]
+]
+```
 
 Please note, that input colors are the source for further creation of probably bigger amount of output colors, so try to insert max. 5 colors as an input for better visual effect.
 
@@ -155,7 +162,17 @@ If you want to get multiple gradients, replace single colors array with array of
 `css` or `svg` entry missing in one of the options objects will result in not including it to the output gradient. So if you provide:
 
 ```javascript
-[
+const colors = [
+    [
+        [0, 22, 33, .2],
+        [0, 221, 233, .1]
+    ],
+    [
+        [10, 22, 33, .2],
+        [99, 221, 233, .1]
+    ]
+]
+const opts = [
     {
         base: {/* some base options */},
         css: {/* some css options */},
@@ -171,7 +188,7 @@ If you want to get multiple gradients, replace single colors array with array of
 It will not result in the css string in the second output object.
 
 ### Concatenation
-The output object responds to the options object. In case of multiple gradients it will be an array of output objects. If you want to get multiple css gradient strings or multiple svg gradients ready to go, use `gradient.concat` and pass your output, and the entry name to it.
+The output object responds to the options object. In case of multiple gradients it will be an array of output objects. If you want to get multiple css gradient strings or multiple svg gradients ready to go, use `concat` method and pass your output and the entry name to it.
 ```javascript
 const multiple = gradientMaker.concat(outputArray, 'css')
 // results in css string
@@ -179,5 +196,9 @@ const multiple2 = gradientMaker.concat(outputArray, 'svg')
 // result in svg defs element
 ```
 
-## Note about opacity
-If you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency. You can also set blend mode to get desired visual effect. However - it might be tricky for some beginner users in the Svg.
+## Notes about opacity
+If you provide colors in rgb format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial colors should be in rgba format, unless you don't want to handle the transparency. 
+
+You can also set blend mode to get desired visual effect. However - it might be tricky for some beginner users, especially when it comes to svg gradients.
+
+**Important! Blend mode will be needed in case of using `bezier` interpolation, because it ignores opacity values.**

@@ -114,6 +114,6 @@ export default class CssOverlay extends Overlay {
      * @private
      */
     _stringifyColors() {
-        return this.colors.map(color => `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] ? color[3] : 1})`)
+        return this.colors.map(color => `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`)
     }
 }

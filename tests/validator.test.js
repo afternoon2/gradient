@@ -12,26 +12,12 @@ test(
     () => {
         const fakeColors = [
             'I am not a color!',
-            'Me too!'
+            [0, 1]
         ]
         const safeValidation = () => {
             validator._validateColors(fakeColors)
         }
         expect(safeValidation).toThrowError('Wrong input format')
-    }
-)
-
-test(
-    '[base] If validator throws error on mixed color types array',
-    () => {
-        const mixedColors = [
-            'rgba(0, 0, 0, 0.4)',
-            '#fcf01f'
-        ]
-        const safeValidation = () => {
-            validator._validateColors(mixedColors)
-        }
-        expect(safeValidation).toThrowError('Colors array contains strings')
     }
 )
 

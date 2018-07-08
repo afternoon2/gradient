@@ -50,11 +50,8 @@ export default class Validator {
      * @private
      */
     _validateColors(colors) {
-        if (this._findInvalidString(colors)) {
+        if (this._findInvalidColors(colors)) {
             throw new Error(baseMessages.invalidColorFormat)
-        }
-        if (this._isMixedArray(colors)) {
-            throw new Error(baseMessages.mixedArray)
         }
     }
 
@@ -117,15 +114,20 @@ export default class Validator {
     }
 
     /**
-     * It checks colors string array for invalid hex or rgba strings
-     * @param {string[]} colors
+     * It checks colors array for invalid ones
+     * @param {number[][]} colors
      * @returns {boolean}
      * @private
      */
-    _findInvalidString(colors) {
-        const invalidString = colors
-            .find(color => !this._hex.test(color) && !this._rgba.test(color))
-        return invalidString !== undefined ? true : false
+    _findInvalidColors(colors) {
+        const invalidColor = colors
+            .find(color => !Array.isArray(color) || 
+                color.length > 4 || 
+                color.length < 3 || 
+                color.find(c => typeof c !== 'number'
+                )
+            )
+        return invalidColor !== undefined ? true : false
     }
 
     /**

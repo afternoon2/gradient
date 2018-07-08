@@ -83,7 +83,7 @@ export default class SvgOverlay extends Overlay {
         stop.setAttribute('offset', `${100 * (index / length)}%`)
         stop.setAttribute(
             'stop-color', 
-            `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] ? color[3] : 1})`
+            `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`
         )
         return stop
     }

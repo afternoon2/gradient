@@ -12,7 +12,7 @@ import Validator from '../Validator'
 /**
  * @class Base
  * @classdesc provides base array of gradient data
- * @param {string[]} colors - input colors
+ * @param {number[][]} colors - input colors
  * @param {BaseOptions} options - base configuration object
  */
 export default class Base {
@@ -135,7 +135,7 @@ export default class Base {
         return base
             .map(entry => entry._rgb)
             .map(entry => entry.filter(c => this._removeClippedValues(c)))
-            .map(entry => entry.map(c => this._roundRgbaValues(c)))
+            .map(entry => entry.map(c => entry.indexOf(c) !== 3 ? this._roundRgbaValues(c) : c))
     }
 
     /**
