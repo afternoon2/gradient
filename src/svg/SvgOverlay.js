@@ -61,18 +61,26 @@ export default class SvgOverlay extends Overlay {
      * @private
      */
     _stops() {
-        return this.colors.map(color => this._createStop(color))
+        return this.colors.map(
+            color => this._createStop(
+                color, 
+                this.colors.indexOf(color),
+                this.colors.length
+            )
+        )
     }
 
     /**
      * Creates single stop element
-     * @param {number[]} color 
+     * @param {number[]} color
+     * @param {number} index 
+     * @param {number} length
      * @returns {SvgElement}
      * @private
      */
-    _createStop(color) {
+    _createStop(color, index, length) {
         const stop = this._svgElement('stop')
-        stop.setAttribute('offset', `${100 / this.colors.length}%`)
+        stop.setAttribute('offset', `${100 * (index / length)}%`)
         stop.setAttribute(
             'stop-color', 
             `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3] ? color[3] : 1})`

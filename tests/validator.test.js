@@ -150,34 +150,6 @@ test(
 )
 
 test(
-    'If validator throws an error when the svg gradient type is linear while there are no coordinates provided',
-    () => {
-        const fakeOptions = {
-            type: 'linear',
-            id: 'identifier'
-        }
-        const safeValidation = () => {
-            validator._validateOptions(fakeOptions)
-        }
-        expect(safeValidation).toThrowError('Missing svg linear gradient\'s coord')
-    }
-)
-
-test(
-    'If validator throws an error when the svg gradient type is radial while there are no coordinates provided',
-    () => {
-        const fakeOptions = {
-            type: 'radial',
-            id: 'identifier'
-        }
-        const safeValidation = () => {
-            validator._validateOptions(fakeOptions)
-        }
-        expect(safeValidation).toThrowError('Missing svg radial gradient\'s coord')
-    }
-)
-
-test(
     'If validator throws an error when the svg gradient type is radial while there are invalid coordinates provided',
     () => {
         const fakeOptions = {

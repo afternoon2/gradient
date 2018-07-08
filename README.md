@@ -98,15 +98,15 @@ Svg gradients API is much more tricker. Here's the interface for the svg options
     type: 'linear' | 'radial',
     id: string
     angle?: number // in 0-359 range, TBD optional for linear gradient
-    x1?: number // required for linear
-    y1?: number // required for linear
-    x2?: number // required for linear
-    y2?: number // required for linear
-    cx?: number // required for radial
-    cy?: number // required for radial
-    r?: number // required for radial
-    fx?: number // optional for radial
-    fy?: number // optional for radial
+    x1?: number // linear gradient prop
+    y1?: number // linear gradient prop
+    x2?: number // linear gradient prop
+    y2?: number // linear gradient prop
+    cx?: number // radial gradient prop
+    cy?: number // radial gradient prop
+    r?: number // radial gradient prop
+    fx?: number // radial gradient prop
+    fy?: number // radial gradient prop
     spreadMethod?: 'pad' | 'repeat' | 'reflect' // optional for radial
 }
 ```

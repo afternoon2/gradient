@@ -211,10 +211,18 @@ export default class Validator {
         if (
             options.type === 'linear' &&
             (
-                typeof options.x1 !== 'number' ||
-                typeof options.y1 !== 'number' ||
-                typeof options.x2 !== 'number' ||
-                typeof options.y2 !== 'number'
+                (
+                    options.x1 &&
+                    options.y1 &&
+                    options.x2 &&
+                    options.y2
+                ) &&
+                (
+                    typeof options.x1 !== 'number' ||
+                    typeof options.y1 !== 'number' ||
+                    typeof options.x2 !== 'number' ||
+                    typeof options.y2 !== 'number'
+                )
             )
         ) {
             throw new Error(svgMessages.missingLinearCoordinates)
@@ -250,9 +258,16 @@ export default class Validator {
         if (
             options.type === 'radial' &&
             (
-                typeof options.cx !== 'number' ||
-                typeof options.cy !== 'number' ||
-                typeof options.r !== 'number'
+                (
+                    options.cx ||
+                    options.cy ||
+                    options.r 
+                ) &&
+                (
+                    typeof options.cx !== 'number' ||
+                    typeof options.cy !== 'number' ||
+                    typeof options.r !== 'number'
+                )
             )
         ) {
             throw new Error(svgMessages.missingRadialCoordinates)
