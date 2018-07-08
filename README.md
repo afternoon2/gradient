@@ -6,14 +6,21 @@ Gradient maker is a javascript module that takes your source colors array and co
 Gradient maker uses `chroma-js` color manipulation library for gradient generation (Copyright (c) 2011-2017, Gregor Aisch).
 
 ## Contents
-- [Installation](#installation)
-- [Usage](#usage)
-- [Parameters](#arameters)
-    - [Colors array](#colors)
-    - [Options](#options)
-        - [Base](#base)
-        - [Css](#css)
-        - [Svg](#svg)
+- [Gradient Maker](#gradient-maker)
+    - [Gradient creation library running in the browser 🖌🌈](#gradient-creation-library-running-in-the-browser-%F0%9F%96%8C%F0%9F%8C%88)
+    - [Contents](#contents)
+    - [Installation](#installation)
+    - [Usage](#usage)
+    - [Parameters](#parameters)
+        - [Colors](#colors)
+        - [Options](#options)
+            - [Base](#base)
+            - [Css](#css)
+            - [Svg](#svg)
+            - [Configuration example](#configuration-example)
+    - [Output](#output)
+    - [Multiple gradients](#multiple-gradients)
+    - [Note about opacity](#note-about-opacity)
 
 ## Installation
 
@@ -71,7 +78,7 @@ Css entry in the configuration object is mandatory if you want to get css gradie
     shape: 'ellipse' | 'circle'
     top?: number
     left?: number
-    extent?: 'farthest-side' | 'closest-side' | 'farthest-corner' | 'farthest-side'
+    extent?: 'farthest-side' | 'closest-side' | 'farthest-corner' | 'closest-corner'
 }
 ```
 The `angle` is ommited when the `type` is set to `radial`.
@@ -82,27 +89,27 @@ When you set the `type` to `radial`, you must provide valid `shape` property.
 
 #### Svg
 
-Svg gradients API is much more tricker than css. Here's the interface for the svg options object
+Svg gradients API is much more tricker. Here's the interface for the svg options object
 
 ```typescript
 {
     type: 'linear' | 'radial',
     id: string
-    angle: number // in 0-359 range, TBD
-    x1?: number
-    y1?: number
-    x2?: number
-    y2?: number
-    cx?: number
-    cy?: number
-    r?: number
-    fx?: number
-    fy?: number
-    spreadMethod?: 'pad' | 'repeat' | 'reflect'
+    angle?: number // in 0-359 range, TBD optional for linear gradient
+    x1?: number // required for linear
+    y1?: number // required for linear
+    x2?: number // required for linear
+    y2?: number // required for linear
+    cx?: number // required for radial
+    cy?: number // required for radial
+    r?: number // required for radial
+    fx?: number // optional for radial
+    fy?: number // optional for radial
+    spreadMethod?: 'pad' | 'repeat' | 'reflect' // optional for radial
 }
 ```
 
-### Configuration example
+#### Configuration example
 ```javascript
 {
     base: {
@@ -113,17 +120,54 @@ Svg gradients API is much more tricker than css. Here's the interface for the sv
     },
     css: {
         type: 'radial',
-        angle: number,
         shape: 'ellipse',
         top: 44,
         left: 30,
         extent: 'farthest-side'
+    },
+    svg: {
+        type: 'radial',
+        cx: 0,
+        cy: 0,
+        r: 45,
+        spreadMethod: 'reflect'
     }
 }
 ```
 
-### Multiple gradients
-If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.
+## Output
 
-### Note about opacity
-Remember that if you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency. You can also set blend mode to get desired visual effect.
+Output object responds to the options object provided. So the output object for the configuration example from above should look like below:
+
+```typescript
+{
+    base: number[]
+    css: string
+    svg: SVGDefsElement
+}
+```
+
+Svg output is a `defs` element with a gradient put in it. It does it because there might be a situation when you want to get multiple gradients instead of one.
+
+## Multiple gradients
+If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.
+`css` or `svg` entry missing in one of the options objects will result in not including it to the output gradient. So if you provide:
+
+```javascript
+[
+    {
+        base: {/* some base options */},
+        css: {/* some css options */},
+        svg: {/* some svg options */}
+    },
+    {
+        base: {/* some base options */},
+        svg: {/* some svg options */}
+    }
+]
+```
+
+It will result with a `defs` element with 2 gradients but a `css` with a single string.
+
+## Note about opacity
+If you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency. You can also set blend mode to get desired visual effect. However - it might be tricky for some beginner users in the Svg.
