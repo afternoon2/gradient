@@ -20,7 +20,7 @@ Gradient maker uses `chroma-js` color manipulation library for gradient generati
             - [Configuration example](#configuration-example)
     - [Output](#output)
     - [Multiple gradients](#multiple-gradients)
-        - [Options](#options)
+        - [Options object](#options-object)
         - [Concatenation](#concatenation)
     - [Note about opacity](#note-about-opacity)
 
@@ -150,7 +150,7 @@ Output object responds to the options object provided. So the output object for 
 ```
 
 ## Multiple gradients
-### Options
+### Options object
 If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.
 `css` or `svg` entry missing in one of the options objects will result in not including it to the output gradient. So if you provide:
 
