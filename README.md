@@ -20,6 +20,8 @@ Gradient maker uses `chroma-js` color manipulation library for gradient generati
             - [Configuration example](#configuration-example)
     - [Output](#output)
     - [Multiple gradients](#multiple-gradients)
+        - [Options](#options)
+        - [Concatenation](#concatenation)
     - [Note about opacity](#note-about-opacity)
 
 ## Installation
@@ -143,13 +145,12 @@ Output object responds to the options object provided. So the output object for 
 {
     base: number[]
     css: string
-    svg: SVGDefsElement
+    svg: SvgLinearGradient
 }
 ```
 
-Svg output is a `defs` element with a gradient put in it. It does it because there might be a situation when you want to get multiple gradients instead of one.
-
 ## Multiple gradients
+### Options
 If you want to get multiple gradients, replace single colors array with array of color arrays, and a config object with array of those.
 `css` or `svg` entry missing in one of the options objects will result in not including it to the output gradient. So if you provide:
 
@@ -167,7 +168,16 @@ If you want to get multiple gradients, replace single colors array with array of
 ]
 ```
 
-It will result with a `defs` element with 2 gradients but a `css` with a single string.
+It will not result in the css string in the second output object.
+
+### Concatenation
+The output object responds to the options object. In case of multiple gradients it will be an array of output objects. If you want to get multiple css gradient strings or multiple svg gradients ready to go, use `gradient.concat` and pass your output, and the entry name to it.
+```javascript
+const multiple = gradientMaker.concat(outputArray, 'css')
+// results in css string
+const multiple2 = gradientMaker.concat(outputArray, 'svg')
+// result in svg defs element
+```
 
 ## Note about opacity
 If you provide colors in hexadecimal format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial strings should be in rgba format, unless you don't want to handle the transparency. You can also set blend mode to get desired visual effect. However - it might be tricky for some beginner users in the Svg.
