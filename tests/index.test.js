@@ -1,9 +1,9 @@
-import GradientMaker from '../src/index'
+import Gradient from '../src/index'
 
 test(
     'If gradient maker returns multiple gradients output with no errors',
     () => {
-        const maker = new GradientMaker()
+        const maker = new Gradient()
         const colors = [
             [[233, 10, 20, 0.23], [33, 120, 20, 0.25]],
             [[13, 4, 20, 0.23], [33, 120, 20, 0.25]]
@@ -46,7 +46,7 @@ test(
 test(
     'If gradient maker concats multiple css strings correctly',
     () => {
-        const maker = new GradientMaker()
+        const maker = new Gradient()
         const colors = [
             [[233, 10, 20, 0.23], [33, 120, 20, 0.25]],
             [[13, 4, 20, 0.23], [33, 120, 20, 0.25]]
@@ -89,7 +89,7 @@ test(
 test(
     'If gradient maker concats multiple svg gradients correctly',
     () => {
-        const maker = new GradientMaker()
+        const maker = new Gradient()
         const colors = [
             [[233, 10, 20, 0.23], [33, 120, 20, 0.25]],
             [[13, 4, 20, 0.23], [33, 120, 20, 0.25]]

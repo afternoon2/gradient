@@ -43,10 +43,10 @@
 
 
     <section>
-        <article><h1>Gradient Maker</h1><h2>Gradient creation library running in the browser 🖌🌈</h2><p>Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from <code>raw</code>, <code>css</code> or <code>svg</code>.</p>
+        <article><h1>gradient.js</h1><h2>Gradient creation library running in the browser 🖌🌈</h2><p>Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from <code>raw</code>, <code>css</code> or <code>svg</code>.</p>
 <p>Gradient maker uses <code>chroma-js</code> color manipulation library for gradient generation (Copyright (c) 2011-2017, Gregor Aisch).</p>
 <h2>Contents</h2><ul>
-<li><a href="#gradient-maker">Gradient Maker</a><ul>
+<li><a href="#gradientjs">gradient.js</a><ul>
 <li><a href="#gradient-creation-library-running-in-the-browser-%F0%9F%96%8C%F0%9F%8C%88">Gradient creation library running in the browser 🖌🌈</a></li>
 <li><a href="#contents">Contents</a></li>
 <li><a href="#installation">Installation</a></li>
@@ -76,10 +76,10 @@
 <li>Via npm<pre class="prettyprint source lang-javascript"><code>npm install --save-dev gradient-maker</code></pre></li>
 <li>Via browser as a umd module<pre class="prettyprint source lang-html"><code>&lt;script src=&quot;https://unpkg.com/gradient-maker@0.1.0.umd.js&quot;></code></pre></li>
 </ol>
-<h2>Usage</h2><p><code>GradientMaker.gradient</code> function takes 2 parameters: hex or rgba (in css format) string colors array and configuration object.</p>
-<pre class="prettyprint source lang-javascript"><code>const gradientMaker = new GradientMaker()
+<h2>Usage</h2><p><code>Gradient.gradient</code> function takes 2 parameters: hex or rgba (in css format) string colors array and configuration object.</p>
+<pre class="prettyprint source lang-javascript"><code>const gradient = new Gradient()
 
-const gradient = gradientMaker.gradient(colors, options)</code></pre><h2>Parameters</h2><h3>Colors</h3><p>Colors input should be an array of numbers in rgb or rgba format.</p>
+const g = gradient.gradient(colors, options)</code></pre><h2>Parameters</h2><h3>Colors</h3><p>Colors input should be an array of numbers in rgb or rgba format.</p>
 <pre class="prettyprint source lang-javascript"><code>[
     [0, 222, 31, 0.4],
     [12, 22, 34]
@@ -171,9 +171,9 @@ const opts = [
     }
 ]</code></pre><p>It will not result in the css string in the second output object.</p>
 <h3>Concatenation</h3><p>The output object responds to the options object. In case of multiple gradients it will be an array of output objects. If you want to get multiple css gradient strings or multiple svg gradients ready to go, use <code>concat</code> method and pass your output and the entry name to it.</p>
-<pre class="prettyprint source lang-javascript"><code>const multiple = gradientMaker.concat(outputArray, 'css')
+<pre class="prettyprint source lang-javascript"><code>const multiple = g.concat(outputArray, 'css')
 // results in css string
-const multiple2 = gradientMaker.concat(outputArray, 'svg')
+const multiple2 = g.concat(outputArray, 'svg')
 // result in svg defs element</code></pre><h2>Notes about opacity</h2><p>If you provide colors in rgb format, you will not see the effects of multiplying, because there will be no opacity set. For multiple gradients initial colors should be in rgba format, unless you don't want to handle the transparency. </p>
 <p>You can also set blend mode to get desired visual effect. However - it might be tricky for some beginner users, especially when it comes to svg gradients.</p>
 <p><strong>Important! Blend mode will be needed in case of using <code>bezier</code> interpolation, because it ignores opacity values.</strong></p></article>
@@ -187,13 +187,13 @@ const multiple2 = gradientMaker.concat(outputArray, 'svg')
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="GradientMaker.html">GradientMaker</a></li><li><a href="SvgOverlay.html">SvgOverlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_stringify">_stringify</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#concat">concat</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Base.html">Base</a></li><li><a href="CssOverlay.html">CssOverlay</a></li><li><a href="Gradient.html">Gradient</a></li><li><a href="SvgOverlay.html">SvgOverlay</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_stringify">_stringify</a></li><li><a href="global.html#base">base</a></li><li><a href="global.html#concat">concat</a></li><li><a href="global.html#gradient">gradient</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jul 14 2018 22:25:59 GMT+0200 (CEST)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Sat Jul 14 2018 22:41:36 GMT+0200 (CEST)
 </footer>
 
 <script> prettyPrint(); </script>

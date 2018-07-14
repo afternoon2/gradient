@@ -1,4 +1,4 @@
-# Gradient Maker
+# gradient.js
 ## Gradient creation library running in the browser 🖌🌈
 
 Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from `raw`, `css` or `svg`.
@@ -6,7 +6,7 @@ Gradient maker is a javascript module that takes your source colors array and co
 Gradient maker uses `chroma-js` color manipulation library for gradient generation (Copyright (c) 2011-2017, Gregor Aisch).
 
 ## Contents
-- [Gradient Maker](#gradient-maker)
+- [gradient.js](#gradientjs)
     - [Gradient creation library running in the browser 🖌🌈](#gradient-creation-library-running-in-the-browser-%F0%9F%96%8C%F0%9F%8C%88)
     - [Contents](#contents)
     - [Installation](#installation)
@@ -36,11 +36,11 @@ npm install --save-dev gradient-maker
 ```
 
 ## Usage
-`GradientMaker.gradient` function takes 2 parameters: hex or rgba (in css format) string colors array and configuration object.
+`Gradient.gradient` function takes 2 parameters: hex or rgba (in css format) string colors array and configuration object.
 ```javascript
-const gradientMaker = new GradientMaker()
+const gradient = new Gradient()
 
-const gradient = gradientMaker.gradient(colors, options)
+const g = gradient.gradient(colors, options)
 ```
 
 ## Parameters
@@ -191,9 +191,9 @@ It will not result in the css string in the second output object.
 ### Concatenation
 The output object responds to the options object. In case of multiple gradients it will be an array of output objects. If you want to get multiple css gradient strings or multiple svg gradients ready to go, use `concat` method and pass your output and the entry name to it.
 ```javascript
-const multiple = gradientMaker.concat(outputArray, 'css')
+const multiple = g.concat(outputArray, 'css')
 // results in css string
-const multiple2 = gradientMaker.concat(outputArray, 'svg')
+const multiple2 = g.concat(outputArray, 'svg')
 // result in svg defs element
 ```
 

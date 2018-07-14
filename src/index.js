@@ -10,17 +10,17 @@ import SvgOverlay from './svg/SvgOverlay'
  */
 
 /**
- * @class GradientMaker
+ * @class Gradient
  * @classdesc generates a gradient depending on the options provided
  */
-export default class GradientMaker {
+export default class Gradient {
     /**
      * Generates gradient depending on the options provided
      * @param {string[]} colors - array of colors as strings in hex or css rgba format
      * @param {object} options
      * @returns {Output|Output[]} - output gradient object/array of output gradient objects
      * @example
-     * const maker = new GradientMaker()
+     * const maker = new Gradient()
      * const gradient = maker.gradient(hexColors, options)
      */
     gradient(colors, options) {

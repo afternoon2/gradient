@@ -20,8 +20,8 @@ export default {
     output: [
         {
             format: 'umd',
-            file: './dist/gradient-maker.umd.js',
-            name: 'GradientMaker',
+            file: './dist/gradient.umd.js',
+            name: 'Gradient',
             sourcemap: true
         }
     ],

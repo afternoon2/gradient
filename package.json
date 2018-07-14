@@ -1,12 +1,11 @@
 {
-  "name": "gradient-maker",
+  "name": "gradient.js",
   "version": "0.1.0",
-  "description": "Css/svg/canvas gradient maker that runs in the browser",
-  "browser": "dist/smartsettings.umd.js",
-  "module": "dist/smartsettings.es.js",
+  "description": "Gradient creation library running in the browser",
+  "browser": "dist/gradient.umd.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/afternoon2/gradient-maker"
+    "url": "https://github.com/afternoon2/gradient"
   },
   "scripts": {
     "dev": "rollup -c",
@@ -17,7 +16,6 @@
   "keywords": [
     "css",
     "svg",
-    "canvas",
     "gradients",
     "colors"
   ],

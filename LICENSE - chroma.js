@@ -1,4 +1,4 @@
-gradient-maker uses chroma.js library
+gradient.js uses chroma.js library
 
 chroma.js - JavaScript library for color conversions
 
