@@ -28,11 +28,11 @@ Gradient maker uses `chroma-js` color manipulation library for gradient generati
 
 1. Via npm
 ```javascript
-npm install --save-dev gradient-maker
+npm install --save-dev gradient
 ```
 2. Via browser as a umd module
 ```html
-<script src="https://unpkg.com/gradient-maker@0.1.0.umd.js">
+<script src="https://unpkg.com/gradient@0.1.0.umd.js">
 ```
 
 ## Usage
