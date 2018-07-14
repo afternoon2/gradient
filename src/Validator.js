@@ -284,5 +284,16 @@ export default class Validator {
         ) {
             throw new Error(svgMessages.invalidGradientUnits)
         }
+
+        if (
+            options.angle &&
+            (
+                typeof options.angle !== 'number' ||
+                options.angle < 0 ||
+                options.angle > 359
+            ) 
+        ) {
+            throw new Error(svgMessages.invalidAngle)
+        }
     }
 }

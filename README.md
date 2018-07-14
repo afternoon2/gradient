@@ -104,7 +104,7 @@ Svg gradients API is much more tricker. Here's the interface for the svg options
 {
     type: 'linear' | 'radial',
     id: string
-    angle?: number // in 0-359 range, TBD optional for linear gradient
+    angle?: number // in 0-359 range, optional for linear gradient
     x1?: number // linear gradient prop
     y1?: number // linear gradient prop
     x2?: number // linear gradient prop

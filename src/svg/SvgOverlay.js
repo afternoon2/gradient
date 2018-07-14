@@ -4,6 +4,7 @@ import Overlay from '../Overlay'
  * @typedef {object} SvgOptions - SvgOverlay component's configuration object
  * @property {string} type - linear or radial
  * @property {id} string - gradient unique identifier
+ * @property {number} angle - between 0 and 359 - for linear gradients
  * @property {number} [x1] - linear gradient's first point's position on the x axis
  * @property {number} [y1] - linear gradient's first point's position on the y axis
  * @property {number} [x2] - linear gradient's second point's position on the x axis
@@ -53,6 +54,9 @@ export default class SvgOverlay extends Overlay {
         Object.entries(this.options)
             .filter(attr => attrs.test(attr[0]))
             .forEach(attr => gradient.setAttribute(attr[0], attr[1]))
+        if (this.options.angle) {
+            gradient.setAttribute('gradientTransform', `rotate(${this.options.angle})`)
+        }
         return gradient
     }
 

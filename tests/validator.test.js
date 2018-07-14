@@ -203,3 +203,19 @@ test(
         expect(safeValidation).toThrowError('Invalid gradient units')
     }
 )
+
+test(
+    'If validator throws an error when the svg gradient angle is invalid',
+    () => {
+        const fakeOptions = {
+            type: 'linear',
+            id: 'id',
+            angle: 'I am not an angle value'
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Invalid angle property')
+    }
+)
+

@@ -19,5 +19,8 @@ export default {
     `,
     invalidGradientUnits: `
         Invalid gradient units. It should be userSpaceOnUse or objectBoundingBox
+    `,
+    invalidAngle: `
+        Invalid angle property provided. It should be a number between 0 and 359
     `
 }
