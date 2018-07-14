@@ -16,5 +16,8 @@ export default {
     `,
     invalidFocalPoint: `
         Invalid focal point coordinates provided
+    `,
+    invalidGradientUnits: `
+        Invalid gradient units. It should be userSpaceOnUse or objectBoundingBox
     `
 }

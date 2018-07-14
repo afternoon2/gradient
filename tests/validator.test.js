@@ -188,3 +188,18 @@ test(
         expect(safeValidation).toThrowError('Invalid focal point coordinates')
     }
 )
+
+test(
+    'If validator throws an error when the svg gradient units are invalid',
+    () => {
+        const fakeOptions = {
+            type: 'linear',
+            id: 'id',
+            gradientUnits: 'nope'
+        }
+        const safeValidation = () => {
+            validator._validateOptions(fakeOptions)
+        }
+        expect(safeValidation).toThrowError('Invalid gradient units')
+    }
+)

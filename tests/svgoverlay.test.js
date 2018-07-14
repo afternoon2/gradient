@@ -12,7 +12,8 @@ test(
             x1: 0,
             x2: 0,
             y1: 100,
-            y2: 100
+            y2: 100,
+            gradientUnits: 'userSpaceOnUse'
         }
         const overlay = new SvgOverlay(colors, options)
         expect(overlay.gradient).toBeInstanceOf(SVGElement)

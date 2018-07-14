@@ -274,5 +274,15 @@ export default class Validator {
         ) {
             throw new Error(svgMessages.missingRadialCoordinates)
         }
+
+        if (
+            options.gradientUnits &&
+            (
+                options.gradientUnits !== 'objectBoundingBox' &&
+                options.gradientUnits !== 'userSpaceOnUse'
+            )
+        ) {
+            throw new Error(svgMessages.invalidGradientUnits)
+        }
     }
 }

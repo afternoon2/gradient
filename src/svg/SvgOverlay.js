@@ -14,6 +14,7 @@ import Overlay from '../Overlay'
  * @property {number} [fx] - radial gradient's focal point position on the x axis
  * @property {number} [fy] - radial gradient's focal point position on the y axis
  * @property {string} [spreadMethod] - radial gradient's spread method: 'pad', 'repeat' or 'reflect'
+ * @property {string} [gradientUnits] - objectBoundingBox or userSpaceOnUse
  */
 
 /**
@@ -48,7 +49,7 @@ export default class SvgOverlay extends Overlay {
      */
     _gradientElement(type) {
         const gradient = this._svgElement(`${type}Gradient`)
-        const attrs = /((id)|([c|f|x|y|r][x|y|1|2]?))/
+        const attrs = /((id)|([c|f|x|y|r][x|y|1|2]?)|(gradientUnits))/
         Object.entries(this.options)
             .filter(attr => attrs.test(attr[0]))
             .forEach(attr => gradient.setAttribute(attr[0], attr[1]))

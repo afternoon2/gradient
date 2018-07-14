@@ -115,6 +115,7 @@ Svg gradients API is much more tricker. Here's the interface for the svg options
     fx?: number // radial gradient prop
     fy?: number // radial gradient prop
     spreadMethod?: 'pad' | 'repeat' | 'reflect' // optional for radial
+    gradientUnits?: 'userSpaceOnUse' | 'objectBoundingBox'
 }
 ```
 
