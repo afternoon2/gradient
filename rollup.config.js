@@ -4,6 +4,7 @@ import commonjs from 'rollup-plugin-commonjs'
 import eslint from 'rollup-plugin-eslint'
 import resolve from 'rollup-plugin-node-resolve'
 import eslintConf from './.eslintrc.json'
+import { terser } from 'rollup-plugin-terser'
 
 const babelConf = { 
     exclude: ['/node_modules/'], 
@@ -22,12 +23,6 @@ export default {
             file: './dist/gradient-maker.umd.js',
             name: 'GradientMaker',
             sourcemap: true
-        },
-        {
-            format: 'es',
-            file: './dist/gradient-maker.esm.js',
-            name: 'GradientMaker', 
-            sourcemap: true
         }
     ],
     watch: {
@@ -41,6 +36,7 @@ export default {
             comments: 'none',
             extensions: '.js'
         }),
-        commonjs()
+        commonjs(),
+        terser()
     ]
 }
