@@ -1,20 +1,19 @@
 import Base from '../src/base/Base'
 
-const colors = [
-    [9, 9, 9, 0.5],
-    [255, 255, 240, 1]
-]
-
 const opts = {
     interpolation: 'linear',
     samples: 10,
     mode: 'none',
-    lightnessCorrection: false
+    lightnessCorrection: true
 }
 
 test(
     'If Base component generates a base of valid length',
     () => {
+        const colors = [
+            [9, 9, 9, 0.5],
+            [255, 255, 240, 1]
+        ]
         const base = new Base(colors, opts)
         const baseResult = base.base
         expect(baseResult.length).toBe(opts.samples)
@@ -38,6 +37,10 @@ test(
 test(
     'If base creation preserves opacity values',
     () => {
+        const colors = [
+            [9, 9, 9, 0.5],
+            [255, 255, 240, 1]
+        ]
         const base = new Base(colors, opts)
         const baseResult = base.base
         const opacityNotPreserved = baseResult

@@ -74,25 +74,26 @@ export default class Base {
      * @private
      */
     _linearInterpolationScale() {
+        const colors = this._stringify(this.colors)
         if (this.options.mode !== 'none') {
             if (this.options.lightnessCorrection) {
                 return chroma
-                    .scale(this.colors)
+                    .scale(colors)
                     .mode(this.options.mode)
                     .correctLightness()
             } else {
                 return chroma
-                    .scale(this.colors)
+                    .scale(colors)
                     .mode(this.options.mode)
             }
         } else {
             if (this.options.lightnessCorrection) {
                 return chroma
-                    .scale(this.colors)
+                    .scale(colors)
                     .correctLightness()
             } else {
                 return chroma
-                    .scale(this.colors)
+                    .scale(colors)
             }
         }
     }
@@ -102,14 +103,15 @@ export default class Base {
      * @private
      */
     _bezierInterpolationScale() {
+        const colors = this._stringify(this.colors)
         if (this.options.lightnessCorrection) {
             return chroma
-                .bezier(this.colors)
+                .bezier(colors)
                 .scale()
                 .correctLightness()
         } else {
             return chroma
-                .bezier(this.colors)
+                .bezier(colors)
         }
     }
 
@@ -141,10 +143,23 @@ export default class Base {
     /**
      * @returns {number}
      * @param {number} val 
+     * @returns {number}
      * Rounds the rgba values up to to the second position
      * @private
      */
     _roundRgbaValues(val) {
         return Math.round(val * 100) / 100
+    }
+
+    /**
+     * Converts number input into rgba string
+     * @param {colors} number[][]
+     * @returns {string}
+     */
+    _stringify(colors) {
+        return colors.map(color => {
+            color[3] = !color[3] ? 1 : color[3] 
+            return `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`
+        })
     }
 }
