@@ -40,7 +40,7 @@ npm install --save-dev gradient
 ```javascript
 const gradient = new Gradient()
 
-const g = gradient.gradient(colors, options)
+const g = gradient.get(colors, options)
 ```
 
 ## Parameters

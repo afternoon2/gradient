@@ -37,7 +37,7 @@ test(
                 }
             }
         ]
-        const gradient = maker.gradient(colors, configs)
+        const gradient = maker.get(colors, configs)
         expect(typeof gradient).toBe('object')
         expect(Array.isArray(gradient)).toBe(true)
     }
@@ -80,7 +80,7 @@ test(
                 }
             }
         ]
-        const gradients = maker.gradient(colors, configs)
+        const gradients = maker.get(colors, configs)
         const multiple = maker.concat(gradients, 'css')
         expect(typeof multiple).toBe('string')
     }
@@ -130,7 +130,7 @@ test(
                 }
             }
         ]
-        const gradients = maker.gradient(colors, configs)
+        const gradients = maker.get(colors, configs)
         const multiple = maker.concat(gradients, 'svg')
         expect(multiple instanceof SVGElement).toBe(true)
     }

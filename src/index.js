@@ -23,7 +23,7 @@ export default class Gradient {
      * const maker = new Gradient()
      * const gradient = maker.gradient(hexColors, options)
      */
-    gradient(colors, options) {
+    get(colors, options) {
         if (!Array.isArray(options)) {
             return this._getSingleGradient(colors, options)
         }
