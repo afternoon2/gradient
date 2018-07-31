@@ -2,8 +2,6 @@ import CssOverlay from '../src/css/CssOverlay'
 
 let overlay
 
-const linearGradientExp = /linear-gradient\(([0-9]+deg)?\,?\s?rgba\([0-9]+\,\s?[0-9]+\,\s?[0-9]+\,\s?[0-9]?\.?([0-9]+)?\),\s?rgba\([0-9]+\,\s?[0-9]+\,\s?[0-9]+\,\s?[0-9]?\.?([0-9]+)?\)\)/
-
 test(
     'If css overlay returns correct linear gradient with no angle',
     () => {
