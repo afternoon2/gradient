@@ -8,10 +8,7 @@
     "url": "https://github.com/afternoon2/gradient"
   },
   "scripts": {
-    "dev": "rollup -c",
-    "test": "jest",
-    "docs": "./node_modules/.bin/jsdoc ./src/* -d ./docs --readme ./README.md",
-    "dev-docs": "./node_modules/.bin/jsdoc -p ./src/* -d ./docs --readme ./README.md"
+    "dev": "rollup -c"
   },
   "keywords": [
     "css",
@@ -24,7 +21,6 @@
   "devDependencies": {
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-preset-env": "^1.7.0",
-    "jest": "^23.2.0",
     "rollup": "^0.62.0",
     "rollup-plugin-babel": "^3.0.6",
     "rollup-plugin-cleanup": "^3.0.0-beta.1",
