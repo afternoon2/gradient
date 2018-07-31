@@ -23,6 +23,12 @@ export default {
             file: './dist/gradient.umd.js',
             name: 'Gradient',
             sourcemap: true
+        },
+        {
+            format: 'es',
+            file: './dist/gradient.mjs',
+            name: 'Gradient',
+            sourcemap: true
         }
     ],
     watch: {
