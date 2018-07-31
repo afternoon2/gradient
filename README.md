@@ -1,11 +1,11 @@
 # gradient.js
 ## Gradient creation library running in the browser 🖌🌈
 
-Gradient maker is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs. Just choose a mode from `raw`, `css` or `svg`.
+gradient.js is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs.
 
-Gradient maker uses `chroma-js` color manipulation library for gradient generation (Copyright (c) 2011-2017, Gregor Aisch).
+gradient.js is built on top of `chroma-js` color manipulation library (Copyright (c) 2011-2017, Gregor Aisch).
 
-You need to install `chroma-js` as a dependency to start gradient.js working.
+You need to install `chroma-js` as a dependency to start working with gradient.js.
 
 ## Contents
 - [gradient.js](#gradientjs)
@@ -18,6 +18,7 @@ You need to install `chroma-js` as a dependency to start gradient.js working.
         - [Options](#options)
     - [Example](#example)
     - [Notes](#notes)
+    - [To be done](#to-be-done)
 
 ## Installation
 
@@ -32,9 +33,9 @@ npm install --save-dev gradient
 
 ## Usage
 
-Depending on your needs, you can use one of two (in future - three) modules: `Base`, `Css` and ~~`Svg`~~. In fact, both - `Css` ~~and `Svg` are~~ is using the `Base` as a required internal dependency.
+Depending on your needs, you can use one of two modules: `Base` and `Css` (the `Css` module uses `Base` module as a requred internal dependency).
 
-So if you want to get a gradient as a array of arrays of rgb(a) numbers, you type following code:
+So if you want to get a gradient as an array of arrays of rgb(a) numbers, you type the following code:
 
 ```javascript
 import Base from 'gradient'
@@ -43,7 +44,7 @@ const base = new Base(yourConfig, yourInputColors)
 const rawGradient = base.get() // number[][]
 ```
 
-If you want to get a css gradient, you don't need to use `Base`. `Css` module does it for you.
+If you want to get a css gradient, you don't need to use the `Base`. `Css` does it for you.
 
 ```javascript
 import Css from 'gradient'
@@ -72,11 +73,11 @@ Or an array of css rgb(a) strings.
 ]
 ```
 
-Please note, that input colors are the source for further creation of probably bigger amount of output colors, so try to insert max. 5 colors as an input for better visual effect.
+Please note, that the input colors are the source for further creation of probably bigger amount of output colors, so try to insert max. 5 colors as an input for better visual effect.
 
 ### Options
 
-The shape of the options object will change depending on the module you are going to use. So in case of getting raw number gradient you will need to pass a `Base` options object. If you want to get a css, the options will have to consist of two entries with two configuration objects. **You must always pass the `Base` options to your configuration**. You will find the options descriptions in the links below.
+The shape of the options object will change depending on the module you are going to use. So in case of getting raw numbers gradient you will need to pass the `Base` options object. If you want to get a css gradient, the options will have to consist of two entries with two configuration objects. **You must always pass the `Base` options to your configuration**. You will find the options descriptions in the links below.
 
 - [Base options description](https://github.com/afternoon2/gradient-base#options)
 - [Css options description](https://github.com/afternoon2/gradient-css#options)
@@ -124,4 +125,9 @@ const cssGradient = css.get()
 
 ## Notes
 
-**The `bezier` interpolation ignores opacity values.**
+* **The `bezier` interpolation ignores opacity values.**
+
+## To be done
+
+* `Svg` module (with React support?)
+* `WegGL` module(?)
