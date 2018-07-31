@@ -16,7 +16,7 @@ export default {
     globals: {
         'chroma-js': 'chroma'
     },
-    input: 'src/index.js',
+    input: './index.js',
     output: [
         {
             format: 'umd',
