@@ -93,6 +93,7 @@ If you want to get a css gradient, the options will have to consist of two entri
 
 - [Base options description](https://github.com/afternoon2/gradient-base#options)
 - [Css options description](https://github.com/afternoon2/gradient-css#options)
+- [Svg options description](https://github.com/afternoon2/gradient-svg#options)
 
 ## Example
 ```javascript
