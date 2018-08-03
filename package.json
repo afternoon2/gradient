@@ -9,7 +9,8 @@
     "url": "https://github.com/afternoon2/gradient"
   },
   "scripts": {
-    "dev": "rollup -c"
+    "build": "rollup -c",
+    "update": "npm update gradient-base gradient-css gradient-svg"
   },
   "keywords": [
     "css",
