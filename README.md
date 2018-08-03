@@ -18,7 +18,6 @@ You need to install `chroma-js` as a dependency to start working with gradient.j
         - [Options](#options)
     - [Example](#example)
     - [Notes](#notes)
-    - [To be done](#to-be-done)
 
 ## Installation
 
@@ -33,24 +32,33 @@ npm install --save-dev gradient
 
 ## Usage
 
-Depending on your needs, you can use one of two modules: `Base` and `Css` (the `Css` module uses `Base` module as a requred internal dependency).
+Depending on your needs, you can use one of the three modules: `Base`, `Css` and `Svg`. The `Css` and `Svg` modules are using `Base` under the hood as an internal dependency.
 
-So if you want to get a gradient as an array of arrays of rgb(a) numbers, you type the following code:
+So if you want to get a gradient as an array of arrays of rgb(a) numbers, type the following code:
 
 ```javascript
-import Base from 'gradient'
+import { Base } from 'gradient'
 
-const base = new Base(yourConfig, yourInputColors)
-const rawGradient = base.get() // number[][]
+const base = new Base()
+const rawGradient = base.get(yourColors, yourConfig) // number[][]
 ```
 
 If you want to get a css gradient, you don't need to use the `Base`. `Css` does it for you.
 
 ```javascript
-import Css from 'gradient'
+import { Css } from 'gradient'
 
-const css = new Css(yourConfig, yourInputColors)
-const cssGradient = css.get() // css string
+const css = new Css()
+const cssGradient = css.get(yourColors, yourConfig) // css string
+```
+
+The same applies to the SVG module
+
+```javascript
+import { Svg } from 'gradient'
+
+const svg = new Svg()
+const svgGradient = svg.get(yourColors, yourConfig) // svg gradient element
 ```
 
 ## Parameters
@@ -73,45 +81,41 @@ Or an array of css rgb(a) strings.
 ]
 ```
 
-Please note, that the input colors are the source for further creation of probably bigger amount of output colors, so try to insert max. 5 colors as an input for better visual effect.
+Please note that the input colors are the source for further creation of probably bigger amount of outputs. Try to insert max. 5 colors as an input for better visual effect.
 
 ### Options
 
-The shape of the options object will change depending on the module you are going to use. So in case of getting raw numbers gradient you will need to pass the `Base` options object. If you want to get a css gradient, the options will have to consist of two entries with two configuration objects. **You must always pass the `Base` options to your configuration**. You will find the options descriptions in the links below.
+The shape of the options object will change depending on the module you are going to use. So in case of getting raw numbers gradient you will need the `Base` options object. 
+
+If you want to get a css gradient, the options will have to consist of two entries with two configuration objects. 
+
+**You must always pass the `Base` options to your configuration**.
 
 - [Base options description](https://github.com/afternoon2/gradient-base#options)
 - [Css options description](https://github.com/afternoon2/gradient-css#options)
 
 ## Example
 ```javascript
-// Raw gradient (base)
-import Base from 'gradient'
+import { Base, Css, Svg } from 'gradient'
 
-const base = new Base([
+const colors = [
     [10, 33, 22, 0.90],
     [120, 23, 44, 1]
-], {
+]
+const baseConfig = {
     interpolation: 'bezier',
     mode: 'none',
     samples: 10,
     lightnessCorrection: true
-})
+}
 
-const rawGradient = base.get()
+const base = new Base()
+const css = new Css()
+const svg = new Svg()
 
-// css gradient
-import Css from 'gradient'
-
-const css = new Css([
-    [10, 33, 22, 0.90],
-    [120, 23, 44, 1]
-], {
-    base: {
-        interpolation: 'bezier',
-        mode: 'none',
-        samples: 10,
-        lightnessCorrection: true
-    },
+const rawGradient = base.get(colors, baseConfig)
+const cssGradient = css.get({
+    base: baseConfig,
     css: {
         type: 'radial',
         shape: 'ellipse',
@@ -120,14 +124,18 @@ const css = new Css([
         extent: 'farthest-side'
     }
 })
-const cssGradient = css.get()
+const svgGradient = svg.get(colors, {
+    base: baseConfig,
+    svg: {
+        type: 'radial',
+        cx: 0.5,
+        cy: 0.5,
+        r: 0.4,
+        spreadMethod: 'reflect'
+    }
+})
 ```
 
 ## Notes
 
 * **The `bezier` interpolation ignores opacity values.**
-
-## To be done
-
-* `Svg` module (with React support?)
-* `WegGL` module(?)
