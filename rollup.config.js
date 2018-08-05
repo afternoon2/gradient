@@ -13,16 +13,15 @@ const babelConf = {
 
 export default {
     external: ['chroma-js'],
-    globals: {
-        'chroma-js': 'chroma'
-    },
-    input: 'src/index.js',
+    input: './index.js',
     output: [
         {
             format: 'umd',
-            file: './dist/gradient.umd.js',
+            file: './gradient.js',
             name: 'Gradient',
-            sourcemap: true
+            globals: {
+                'chroma-js': 'chroma'
+            }
         }
     ],
     watch: {
@@ -30,13 +29,13 @@ export default {
     },
     plugins: [
         resolve(),
+        commonjs(),
         eslint(eslintConf),
         babel(babelConf),
         cleanup({
             comments: 'none',
             extensions: '.js'
         }),
-        commonjs(),
         terser()
     ]
 }
