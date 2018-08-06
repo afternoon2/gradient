@@ -26,11 +26,11 @@ You need to install `chroma-js` as a dependency to start working with gradient.j
 
 1. Via npm
 ```javascript
-npm install --save-dev gradient
+npm install --save-dev gradient-all
 ```
 2. Via browser as a umd module
 ```html
-<script src="https://unpkg.com/gradient@1.0.0.umd.js">
+<script src="https://unpkg.com/gradient-all@1.0.0/gradient.js">
 ```
 
 ## Usage
