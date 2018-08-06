@@ -2,7 +2,7 @@
 ## Gradient creation library running in the browser 🖌🌈
 
 [![License](https://img.shields.io/npm/l/gradient.svg?style=flat)](https://github.com/afternoon2/gradient/blob/master/LICENSE)&nbsp;&nbsp;
-[![Travis build](https://img.shields.io/travis/afternoon2/gradient.svg?style=flat)](https://travis-ci.org/afternoon2/gradient)(https://codecov.io/gh/afternoon2/gradient)
+[![Travis build](https://img.shields.io/travis/afternoon2/gradient.svg?style=flat)](https://travis-ci.org/afternoon2/gradient)
 
 gradient.js is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs.
 
