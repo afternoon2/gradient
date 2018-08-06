@@ -1,6 +1,9 @@
 # gradient.js
 ## Gradient creation library running in the browser 🖌🌈
 
+[![License](https://img.shields.io/npm/l/gradient.svg?style=flat)](https://github.com/afternoon2/gradient/blob/master/LICENSE)&nbsp;&nbsp;
+[![Travis build](https://img.shields.io/travis/afternoon2/gradient.svg?style=flat)](https://travis-ci.org/afternoon2/gradient)&nbsp;&nbsp;[![Codecov](https://img.shields.io/codecov/c/github/afternoon2/gradient.svg?style=flat)](https://codecov.io/gh/afternoon2/gradient)
+
 gradient.js is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs.
 
 gradient.js is built on top of `chroma-js` color manipulation library (Copyright (c) 2011-2017, Gregor Aisch).
@@ -27,7 +30,7 @@ npm install --save-dev gradient
 ```
 2. Via browser as a umd module
 ```html
-<script src="https://unpkg.com/gradient@0.1.0.umd.js">
+<script src="https://unpkg.com/gradient@1.0.0.umd.js">
 ```
 
 ## Usage
