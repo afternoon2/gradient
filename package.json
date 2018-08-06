@@ -1,6 +1,6 @@
 {
   "name": "gradient.js",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "Gradient creation library running in the browser",
   "browser": "gradient.js",
   "module": "dist/gradient.mjs",
