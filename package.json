@@ -1,5 +1,5 @@
 {
-  "name": "gradient.js",
+  "name": "@afternoon2/gradient-js",
   "version": "1.0.0",
   "description": "Gradient creation library running in the browser",
   "browser": "gradient.js",
