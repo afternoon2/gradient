@@ -1,7 +1,7 @@
-# gradient.js
+# gradient.js [gradient-all]
 ## Gradient creation library running in the browser 🖌🌈
 
-[![License](https://img.shields.io/npm/l/gradient.svg?style=flat)](https://github.com/afternoon2/gradient/blob/master/LICENSE)&nbsp;&nbsp;
+[![License](https://img.shields.io/npm/l/gradient-all.svg?style=flat)](https://github.com/afternoon2/gradient/blob/master/LICENSE)&nbsp;&nbsp;
 [![Travis build](https://img.shields.io/travis/afternoon2/gradient.svg?style=flat)](https://travis-ci.org/afternoon2/gradient)
 
 gradient.js is a javascript module that takes your source colors array and configuration object, and returns a gradient suitable for your needs.
@@ -11,7 +11,7 @@ gradient.js is built on top of `chroma-js` color manipulation library (Copyright
 You need to install `chroma-js` as a dependency to start working with gradient.js.
 
 ## Contents
-- [gradient.js](#gradientjs)
+- [gradient.js [gradient-all]](#gradientjs-gradient-all)
     - [Gradient creation library running in the browser 🖌🌈](#gradient-creation-library-running-in-the-browser-%F0%9F%96%8C%F0%9F%8C%88)
     - [Contents](#contents)
     - [Installation](#installation)
