@@ -11,7 +11,7 @@
   "scripts": {
     "dev": "rollup -c",
     "update": "npm update gradient-base gradient-css gradient-svg",
-    "test": "jest --coverage && codecov",
+    "test": "jest --coverage",
     "commit": "git-cz",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once"
