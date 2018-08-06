@@ -24,9 +24,6 @@ export default {
             }
         }
     ],
-    watch: {
-        include: 'src/**'
-    },
     plugins: [
         resolve(),
         commonjs(),
