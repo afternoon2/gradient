@@ -112,16 +112,16 @@ test(
             [10, 220, 33, 0.1],
             [254, 200, 10, 1]
         ], {
-                base: {
-                    interpolation: 'linear',
-                    samples: 10,
-                    mode: 'hsl',
-                    lightessCorrection: true
-                },
-                css: {
-                    type: 'linear'
-                }
-            })
+            base: {
+                interpolation: 'linear',
+                samples: 10,
+                mode: 'hsl',
+                lightessCorrection: true
+            },
+            css: {
+                type: 'linear'
+            }
+        })
         expect(regexp.test(gradient)).toBe(true)
     }
 )
@@ -135,17 +135,17 @@ test(
             [10, 220, 33, 0.1],
             [254, 200, 10, 1]
         ], {
-                base: {
-                    interpolation: 'linear',
-                    samples: 10,
-                    mode: 'hsl',
-                    lightessCorrection: true
-                },
-                css: {
-                    type: 'linear',
-                    angle: 90
-                }
-            })
+            base: {
+                interpolation: 'linear',
+                samples: 10,
+                mode: 'hsl',
+                lightessCorrection: true
+            },
+            css: {
+                type: 'linear',
+                angle: 90
+            }
+        })
         expect(regexp.test(gradient)).toBe(true)
     }
 )
@@ -159,17 +159,17 @@ test(
             [10, 220, 33, 0.1],
             [254, 200, 10, 1]
         ], {
-                base: {
-                    interpolation: 'linear',
-                    samples: 10,
-                    mode: 'hsl',
-                    lightessCorrection: true
-                },
-                css: {
-                    type: 'radial',
-                    shape: 'circle'
-                }
-            })
+            base: {
+                interpolation: 'linear',
+                samples: 10,
+                mode: 'hsl',
+                lightessCorrection: true
+            },
+            css: {
+                type: 'radial',
+                shape: 'circle'
+            }
+        })
         expect(regexp.test(gradient)).toBe(true)
     }
 )
@@ -183,19 +183,19 @@ test(
             [10, 220, 33, 0.1],
             [254, 200, 10, 1]
         ], {
-                base: {
-                    interpolation: 'linear',
-                    samples: 10,
-                    mode: 'hsl',
-                    lightessCorrection: true
-                },
-                css: {
-                    type: 'radial',
-                    shape: 'circle',
-                    top: 30,
-                    left: 20
-                }
-            })
+            base: {
+                interpolation: 'linear',
+                samples: 10,
+                mode: 'hsl',
+                lightessCorrection: true
+            },
+            css: {
+                type: 'radial',
+                shape: 'circle',
+                top: 30,
+                left: 20
+            }
+        })
         expect(regexp.test(gradient)).toBe(true)
     }
 )
@@ -224,5 +224,37 @@ test(
             }
         })
         expect(regexp.test(gradient)).toBe(true)
+    }
+)
+
+
+test(
+    'If SvgOverlay creates a raw gradient correctly',
+    () => {
+        const colors = [
+            [1, 224, 128, 0.4],
+            [100, 55, 4, 0.1]
+        ]
+        const options = {
+            base: {
+                interpolation: 'linear',
+                samples: 10,
+                mode: 'rgb',
+                lightnessCorrection: false
+            },
+            svg: {
+                type: 'linear',
+                id: 'gradient-0',
+                x1: 0,
+                x2: 0,
+                y1: 100,
+                y2: 100,
+                angle: 100,
+                gradientUnits: 'userSpaceOnUse'
+            }
+        }
+        const overlay = new Svg()
+        expect(overlay.get(colors, options, true)).toBeInstanceOf(Object)
+        expect(overlay.get(colors, options, true).stops.length).toBe(options.base.samples)
     }
 )

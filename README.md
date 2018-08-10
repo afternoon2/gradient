@@ -137,7 +137,19 @@ const svgGradient = svg.get(colors, {
         r: 0.4,
         spreadMethod: 'reflect'
     }
-})
+}) // returns svg gradient element
+
+const rawSvgGradient = svg.get(colors, {
+    base: baseConfig,
+    svg: {
+        type: 'radial',
+        cx: 0.5,
+        cy: 0.5,
+        r: 0.4,
+        spreadMethod: 'reflect'
+    },
+    true
+}) // returns an object
 ```
 
 ## Notes
