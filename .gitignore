@@ -2,5 +2,6 @@
 /coverage/
 /packages/**/node_modules
 /packages/**/coverage
-/packages/**/lib
+/packages/**/dist
 lerna-debug.log
+.awcache
