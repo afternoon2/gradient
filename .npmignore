@@ -1,9 +1,0 @@
-coverage
-.babelrc
-.eslintignore
-index.js
-index.test.js
-jest.config.js
-rollup.config.js
-.travis.yml
-.eslintrc.json

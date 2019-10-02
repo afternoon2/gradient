@@ -1,4 +1,4 @@
-node_modules/
-.vscode
-gradient.js
-coverage
+/node_modules/
+/coverage/
+/packages/**/node_modules
+/packages/**/coverage

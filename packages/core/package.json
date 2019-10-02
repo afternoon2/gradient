@@ -1,0 +1,33 @@
+{
+  "name": "@gradient/core",
+  "version": "0.0.0",
+  "description": "Core module of the gradient.js library",
+  "keywords": [
+    "gradients",
+    "colors",
+    "chroma-js",
+    "hue"
+  ],
+  "author": "Jakub Antolak <jakub.antolak@envoydigital.com>",
+  "homepage": "https://github.com/afternoon2/gradient#readme",
+  "license": "MIT",
+  "main": "lib/core.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afternoon2/gradient.git"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/afternoon2/gradient/issues"
+  }
+}
