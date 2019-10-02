@@ -2,3 +2,5 @@
 /coverage/
 /packages/**/node_modules
 /packages/**/coverage
+/packages/**/lib
+lerna-debug.log
