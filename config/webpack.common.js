@@ -7,18 +7,6 @@ const commonConfig = {
   resolve: {
     extensions: ['.ts'],
   },
-  module: {
-    rules: [
-      {
-        test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
-        options: {
-          useCache: true,
-          declaration: true,
-        }
-      }
-    ]
-  },
   plugins: [
     new CheckerPlugin(),
   ],
@@ -32,6 +20,19 @@ module.exports = [
       path: path.join(__dirname, '../packages/core/dist'),
       filename: 'core.js'
     },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+          options: {
+            useCache: true,
+            declaration: true,
+            configFileName: path.resolve(__dirname, '../packages/core/tsconfig.json')
+          }
+        }
+      ]
+    },
     ...commonConfig,
   },
   {
@@ -41,6 +42,19 @@ module.exports = [
       path: path.join(__dirname, '../packages/css/dist'),
       filename: 'css.js'
     },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+          options: {
+            useCache: true,
+            declaration: true,
+            configFileName: path.resolve(__dirname, '../packages/css/tsconfig.json')
+          }
+        }
+      ]
+    },
     ...commonConfig,
   },
   {
@@ -49,6 +63,19 @@ module.exports = [
     output: {
       path: path.join(__dirname, '../packages/svg/dist'),
       filename: 'svg.js'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.tsx?$/,
+          loader: 'awesome-typescript-loader',
+          query: {
+            useCache: true,
+            declaration: true,
+            configFileName: path.resolve(__dirname, '../packages/svg/tsconfig.json'),
+          }
+        }
+      ]
     },
     ...commonConfig,
   },

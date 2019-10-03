@@ -4,4 +4,4 @@
 /packages/**/coverage
 /packages/**/dist
 lerna-debug.log
-.awcache
+/.awcache/
