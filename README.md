@@ -1,3 +1,6 @@
+# Deprecated
+## Better check [gradient-js](https://github.com/afternoon2/gradient-js).
+
 # gradient.js [gradient-all]
 ## Gradient creation library running in the browser 🖌🌈
 
@@ -11,16 +14,18 @@ gradient.js is built on top of `chroma-js` color manipulation library (Copyright
 You need to install `chroma-js` as a dependency to start working with gradient.js.
 
 ## Contents
+- [Deprecated](#deprecated)
+  - [Better check gradient-js.](#better-check-gradient-js)
 - [gradient.js [gradient-all]](#gradientjs-gradient-all)
-    - [Gradient creation library running in the browser 🖌🌈](#gradient-creation-library-running-in-the-browser-%F0%9F%96%8C%F0%9F%8C%88)
-    - [Contents](#contents)
-    - [Installation](#installation)
-    - [Usage](#usage)
-    - [Parameters](#parameters)
-        - [Colors](#colors)
-        - [Options](#options)
-    - [Example](#example)
-    - [Notes](#notes)
+  - [Gradient creation library running in the browser 🖌🌈](#gradient-creation-library-running-in-the-browser-%f0%9f%96%8c%f0%9f%8c%88)
+  - [Contents](#contents)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Parameters](#parameters)
+    - [Colors](#colors)
+    - [Options](#options)
+  - [Example](#example)
+  - [Notes](#notes)
 
 ## Installation
 

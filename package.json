@@ -51,25 +51,5 @@
     "gradient-base": "^1.0.4",
     "gradient-css": "^1.0.1",
     "gradient-svg": "^1.1.1"
-  },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "pre-commit": "npm run test"
-    },
-    "jest": {
-      "coverageThreshold": {
-        "global": {
-          "branches": 50,
-          "functions": 50,
-          "lines": 50,
-          "statements": 50
-        }
-      },
-      "coverageDirectory": "./coverage",
-      "collectCoverage": true
-    }
   }
 }
